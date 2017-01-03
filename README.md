@@ -11,9 +11,9 @@ $ npm install bay-utils.js
 ```
 
 ```js
-import { getFormData, formatDate } from 'bay-utils';
-getFormData($formEl);
-formatDate(date);
+import { isMobileUA } from 'bay-utils';
+console.log(isMobileUA(navigator.userAgent));
+> true;
 ```
 
 ## cdn
@@ -28,8 +28,7 @@ The easiest way to use utils is to load the built script:
 Having include the dependencies, the library can be used:
 
 ```js
-xbayUtils.getFormData($formEl);
-xbayUtils.formatDate(date);
+xbayUtils.isMobileUA(navigator.userAgent);
 ```
 
 # Usage

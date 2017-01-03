@@ -1,7 +1,7 @@
 Gemfile.lock
 
-_site
 dist
+lib
 
 .DS_Store
 
