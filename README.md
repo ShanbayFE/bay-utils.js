@@ -46,7 +46,7 @@ xbayCommon.formatDate(date);
 ## Validator
 
 #### assertString
-验证输入是否是字符串
+    验证输入是否是字符串
     > xbayCommon.assertString(111)
     > false
 
@@ -55,12 +55,12 @@ xbayCommon.formatDate(date);
     > false
 
 #### merge
-合并两个 object，第二个参数的 key 不会覆盖前面的。
+    合并两个 object，第二个参数的 key 不会覆盖前面的。
     > xbayCommon.merge({x: 1}, {x: 2, y: 4})
     > false
 
 #### isStandardBrowserEnv
-判断是否是标准的浏览器环境
+    判断是否是标准的浏览器环境
     > xbayCommon.isStandardBrowserEnv()
     > false
 
@@ -69,37 +69,37 @@ xbayCommon.formatDate(date);
     > true
 
 #### isWechatUA
-判断 Agent 是否是微信
+    判断 Agent 是否是微信
     > xbayCommon.isWechatUA(navigator.userAgent)
     > false
 
 #### isMobileUA
-判断 Agent 是否是手机
+    判断 Agent 是否是手机
     > xbayCommon.isMobileUA(navigator.userAgent)
     > false
 
 #### isShanbayAppUA
-判断 Agent 是否是扇贝 APP
+    判断 Agent 是否是扇贝 APP
     > xbayCommon.isShanbayAppUA(navigator.userAgent)
     > false
 
 #### isMobilePhone
-判断字符串是否是手机号
+    判断字符串是否是手机号
     > xbayCommon.isMobilePhone(13323432221)
     > true
 
 #### isEmail
-判断字符串是否是邮箱
+    判断字符串是否是邮箱
     > xbayCommon.isEmail('133@qq.com')
     > true
 
 #### isUrl
-判断字符串是否是 url
+    判断字符串是否是 url
     > xbayCommon.isUrl('https://www.shanbay.com/')
     > true
 
 #### escapeStr
-转义 <, >, &, ', " 和 /。
+    转义 <, >, &, ', " 和 /。
     > xbayCommon.escapeStr('<p>hi</p>')
     > "&lt;p&gt;hi&lt;&#x2F;p&gt;"
 
@@ -108,24 +108,24 @@ xbayCommon.formatDate(date);
     > "<p>hi</p>"
 
 #### isStrLength
-第二个参数是 options，默认为 {min:0, max: undefined}
+    第二个参数是 options，默认为 {min:0, max: undefined}
     > xbayCommon.isStrLength('hello', {min: 2, max: 5})
     > true
 
 #### isJSON
-判断字符串是不是 json，使用 json.parse
+    判断字符串是不是 json，使用 json.parse
     > xbayCommon.isJSON('hello')
     > false
     > xbayCommon.isJSON(JSON.stringify({x: 1}))
     > true
 
 #### isNumeric
-判读字符串是否为数字
+    判读字符串是否为数字
     > xbayCommon.isNumeric('123');
     > true
 
 #### isEmptyStr
-判断字符串是否为空
+    判断字符串是否为空
     > xbayCommon.isEmptyStr('123');
     > false
 
