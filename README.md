@@ -21,8 +21,11 @@ console.log(isMobileUA(navigator.userAgent));
 The easiest way to use utils is to load the built script:
 
 ```html
-<script type="text/javascript" src="https://static.baydn.com/baydn/bay-utils.js"></script>
-<script type="text/javascript" src="https://static.baydn.com/baydn/bay-utils.min.js"></script>
+<!-- development -->
+<script type="text/javascript" src="https://static.baydn.com/baydn/public/bay-utils/v1.1.1/bay-utils.js"></script>
+
+<!-- production -->
+<script type="text/javascript" src="https://static.baydn.com/baydn/public/bay-utils/v1.1.1/bay-utils.min.js"></script>
 ```
 
 Having include the dependencies, the library can be used:
