@@ -1,9 +1,7 @@
-.sass-cache
-.sync-config.cson
 Gemfile.lock
 
-_site
-vendor/ruby
+dist
+lib
 
 .DS_Store
 

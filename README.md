@@ -1,33 +1,44 @@
-# utils.js
+# bay-utils.js
 
 > A Common Functions Library for Javascript
 
 This project is **working in progress**.
 
-# Basic Usage
+# Installation
+## npm
+```
+$ npm install bay-utils.js
+```
+
+```js
+import { isMobileUA } from 'bay-utils';
+console.log(isMobileUA(navigator.userAgent));
+> true;
+```
+
+## cdn
 
 The easiest way to use utils is to load the built script:
 
 ```html
-<script type="text/javascript" src="utils.js"></script>
-```
+<!-- development -->
+<script type="text/javascript" src="https://static.baydn.com/baydn/public/bay-utils/v1.1.1/bay-utils.js"></script>
 
-You can also use the baydn(Shanbay CDN):
-```html
-<script type="text/javascript" src="utils.js"></script> // TODO
+<!-- production -->
+<script type="text/javascript" src="https://static.baydn.com/baydn/public/bay-utils/v1.1.1/bay-utils.min.js"></script>
 ```
 
 Having include the dependencies, the library can be used:
 
 ```js
-xbayCommon.getFormData($formEl);
-xbayCommon.formatDate(date);
-...
+xbayUtils.isMobileUA(navigator.userAgent);
 ```
+
+# Usage
 
 ## Format
 
-#### parseDate
+### parseDate
     /**
      * 获取一个日期对象
      * @param {string} time 日期
@@ -35,7 +46,7 @@ xbayCommon.formatDate(date);
      */
      const date = parseDate(time);
 
-#### formatDate
+### formatDate
     /**
      * 获取某一格式的日期
      * @param {string} date 日期
@@ -45,93 +56,93 @@ xbayCommon.formatDate(date);
 
 ## Validator
 
-#### assertString
+### assertString
     验证输入是否是字符串
-    > xbayCommon.assertString(111)
+    > assertString(111)
     > false
 
-#### toString
-    > xbayCommon.toString({x: 1})
+### toString
+    > toString({x: 1})
     > false
 
-#### merge
+### merge
     合并两个 object，第二个参数的 key 不会覆盖前面的。
-    > xbayCommon.merge({x: 1}, {x: 2, y: 4})
+    > merge({x: 1}, {x: 2, y: 4})
     > false
 
-#### isStandardBrowserEnv
+### isStandardBrowserEnv
     判断是否是标准的浏览器环境
-    > xbayCommon.isStandardBrowserEnv()
+    > isStandardBrowserEnv()
     > false
 
-#### isFunction
-    > xbayCommon.isFunction(function(){})
+### isFunction
+    > isFunction(function(){})
     > true
 
-#### isWechatUA
+### isWechatUA
     判断 Agent 是否是微信
-    > xbayCommon.isWechatUA(navigator.userAgent)
+    > isWechatUA(navigator.userAgent)
     > false
 
-#### isMobileUA
+### isMobileUA
     判断 Agent 是否是手机
-    > xbayCommon.isMobileUA(navigator.userAgent)
+    > isMobileUA(navigator.userAgent)
     > false
 
-#### isShanbayAppUA
+### isShanbayAppUA
     判断 Agent 是否是扇贝 APP
-    > xbayCommon.isShanbayAppUA(navigator.userAgent)
+    > isShanbayAppUA(navigator.userAgent)
     > false
 
-#### isMobilePhone
+### isMobilePhone
     判断字符串是否是手机号
-    > xbayCommon.isMobilePhone(13323432221)
+    > isMobilePhone(13323432221)
     > true
 
-#### isEmail
+### isEmail
     判断字符串是否是邮箱
-    > xbayCommon.isEmail('133@qq.com')
+    > isEmail('133@qq.com')
     > true
 
-#### isUrl
+### isUrl
     判断字符串是否是 url
-    > xbayCommon.isUrl('https://www.shanbay.com/')
+    > isUrl('https://www.shanbay.com/')
     > true
 
-#### escapeStr
+### escapeStr
     转义 <, >, &, ', " 和 /。
-    > xbayCommon.escapeStr('<p>hi</p>')
+    > escapeStr('<p>hi</p>')
     > "&lt;p&gt;hi&lt;&#x2F;p&gt;"
 
-#### unescapeStr
-    > xbayCommon.unescapeStr("&lt;p&gt;hi&lt;&#x2F;p&gt;")
+### unescapeStr
+    > unescapeStr("&lt;p&gt;hi&lt;&#x2F;p&gt;")
     > "<p>hi</p>"
 
-#### isStrLength
+### isStrLength
     第二个参数是 options，默认为 {min:0, max: undefined}
-    > xbayCommon.isStrLength('hello', {min: 2, max: 5})
+    > isStrLength('hello', {min: 2, max: 5})
     > true
 
-#### isJSON
+### isJSON
     判断字符串是不是 json，使用 json.parse
-    > xbayCommon.isJSON('hello')
+    > isJSON('hello')
     > false
-    > xbayCommon.isJSON(JSON.stringify({x: 1}))
+    > isJSON(JSON.stringify({x: 1}))
     > true
 
-#### isNumeric
+### isNumeric
     判读字符串是否为数字
-    > xbayCommon.isNumeric('123');
+    > isNumeric('123');
     > true
 
-#### isEmptyStr
+### isEmptyStr
     判断字符串是否为空
-    > xbayCommon.isEmptyStr('123');
+    > isEmptyStr('123');
     > false
 
 ## Dom
 
-#### getFormData
+### getFormData
     /**
      * 获取表单数据
      * @param {element} formEl 表单元素
@@ -140,28 +151,28 @@ xbayCommon.formatDate(date);
      */
      const data = getFormData(formEl);
 
-#### clearFormData
+### clearFormData
     /**
      * 清空表单输入框的值
      * @param {element} formEl 表单元素
      */
      clearFormData(formEl);
 
-#### selectElement
+### selectElement
     /**
      * 选择元素中的内容
      * @param {element} el 元素
      */
      selectElement(el);
 
-#### copyToClipboard
+### copyToClipboard
     /**
      * 复制文字到剪贴板
      * @param {string} text 复制的内容
      */
      copyToClipboard(text);
 
-#### lazyloadImage
+### lazyloadImage
     /**
      * 图片懒加载
      */
@@ -170,7 +181,7 @@ xbayCommon.formatDate(date);
 
 ## Others
 
-#### ajax
+### ajax
     /**
     * @param {string} options 类似 jquery ajax 的 options。
     * 不同的是当 isOriginal 为 false 时，success 判断了 status_code 为 0，success 会返回 data，
@@ -180,7 +191,7 @@ xbayCommon.formatDate(date);
     */
     ajax(options, isOriginal, configure);
 
-#### getSearchValue
+### getSearchValue
     /**
     * 获取链接中 search 的值
     * @param {string} name 名称
@@ -188,7 +199,7 @@ xbayCommon.formatDate(date);
     */
     const value = getSearchValue(name);
 
-#### getCookie
+### getCookie
     /**
     * 获取 cookie 中的值
     * @param {string} cookie 名称

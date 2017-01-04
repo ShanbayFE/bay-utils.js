@@ -5,37 +5,34 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const buildPath = path.join(__dirname, 'dist/');
 
-const plugins = [
-    new CleanWebpackPlugin(['./dist']),
-    new webpack.optimize.UglifyJsPlugin({
-        compress: {
-            warnings: false,
-        },
-    }),
-];
-
-const commonLoaders = [
-    {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loaders: ['babel'],
-    }
-];
-
 const commonConfig = {
     entry: {
-        utils: './src/index',
+        'bay-utils': './src/index',
+        'bay-utils.min': './src/index',
     },
     output: {
         path: buildPath,
-        filename: 'utils.js',
-        library: 'xbayCommon',
+        filename: '[name].js',
+        library: 'bayUtils',
         libraryTarget: 'var',
     },
     module: {
-        loaders: commonLoaders,
+        loaders: [{
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loaders: ['babel'],
+        }],
     },
-    plugins,
+    plugins: [
+        new CleanWebpackPlugin(['./dist']),
+        new webpack.optimize.UglifyJsPlugin({
+            include: /\.min\.js$/,
+            minimize: true,
+            compress: {
+                warnings: false
+            }
+        }),
+    ],
 };
 
 module.exports = commonConfig;
