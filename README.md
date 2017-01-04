@@ -58,86 +58,86 @@ xbayUtils.isMobileUA(navigator.userAgent);
 
 ### assertString
     验证输入是否是字符串
-    > xbayCommon.assertString(111)
+    > assertString(111)
     > false
 
 ### toString
-    > xbayCommon.toString({x: 1})
+    > toString({x: 1})
     > false
 
 ### merge
     合并两个 object，第二个参数的 key 不会覆盖前面的。
-    > xbayCommon.merge({x: 1}, {x: 2, y: 4})
+    > merge({x: 1}, {x: 2, y: 4})
     > false
 
 ### isStandardBrowserEnv
     判断是否是标准的浏览器环境
-    > xbayCommon.isStandardBrowserEnv()
+    > isStandardBrowserEnv()
     > false
 
 ### isFunction
-    > xbayCommon.isFunction(function(){})
+    > isFunction(function(){})
     > true
 
 ### isWechatUA
     判断 Agent 是否是微信
-    > xbayCommon.isWechatUA(navigator.userAgent)
+    > isWechatUA(navigator.userAgent)
     > false
 
 ### isMobileUA
     判断 Agent 是否是手机
-    > xbayCommon.isMobileUA(navigator.userAgent)
+    > isMobileUA(navigator.userAgent)
     > false
 
 ### isShanbayAppUA
     判断 Agent 是否是扇贝 APP
-    > xbayCommon.isShanbayAppUA(navigator.userAgent)
+    > isShanbayAppUA(navigator.userAgent)
     > false
 
 ### isMobilePhone
     判断字符串是否是手机号
-    > xbayCommon.isMobilePhone(13323432221)
+    > isMobilePhone(13323432221)
     > true
 
 ### isEmail
     判断字符串是否是邮箱
-    > xbayCommon.isEmail('133@qq.com')
+    > isEmail('133@qq.com')
     > true
 
 ### isUrl
     判断字符串是否是 url
-    > xbayCommon.isUrl('https://www.shanbay.com/')
+    > isUrl('https://www.shanbay.com/')
     > true
 
 ### escapeStr
     转义 <, >, &, ', " 和 /。
-    > xbayCommon.escapeStr('<p>hi</p>')
+    > escapeStr('<p>hi</p>')
     > "&lt;p&gt;hi&lt;&#x2F;p&gt;"
 
 ### unescapeStr
-    > xbayCommon.unescapeStr("&lt;p&gt;hi&lt;&#x2F;p&gt;")
+    > unescapeStr("&lt;p&gt;hi&lt;&#x2F;p&gt;")
     > "<p>hi</p>"
 
 ### isStrLength
     第二个参数是 options，默认为 {min:0, max: undefined}
-    > xbayCommon.isStrLength('hello', {min: 2, max: 5})
+    > isStrLength('hello', {min: 2, max: 5})
     > true
 
 ### isJSON
     判断字符串是不是 json，使用 json.parse
-    > xbayCommon.isJSON('hello')
+    > isJSON('hello')
     > false
-    > xbayCommon.isJSON(JSON.stringify({x: 1}))
+    > isJSON(JSON.stringify({x: 1}))
     > true
 
 ### isNumeric
     判读字符串是否为数字
-    > xbayCommon.isNumeric('123');
+    > isNumeric('123');
     > true
 
 ### isEmptyStr
     判断字符串是否为空
-    > xbayCommon.isEmptyStr('123');
+    > isEmptyStr('123');
     > false
 
 ## Dom

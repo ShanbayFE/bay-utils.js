@@ -4,8 +4,9 @@
   "description": "common functions for shanbay frontend projects",
   "main": "lib/index.js",
   "scripts": {
-    "compile": "webpack --display-error-detail --progress && babel -d lib/ src/ --presets=latest",
-    "prepublish": "npm run compile"
+    "prepublish": "npm run compile",
+    "test": "npm run compile && mocha -w --compilers js:babel-core/register",
+    "compile": "webpack --display-error-detail --progress && babel -d lib/ src/ --presets=latest"
   },
   "author": "ice",
   "license": "ISC",
@@ -14,6 +15,7 @@
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.4",
     "babel-preset-latest": "^6.16.0",
+    "chai": "^3.5.0",
     "clean-webpack-plugin": "^0.1.14",
     "webpack": "^1.14.0"
   }

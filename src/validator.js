@@ -21,7 +21,7 @@ export const toString = (input) => {
 };
 
 export const merge = (obj = {}, defaults) => {
-    defaults.forEach(key => {
+    Object.keys(defaults).forEach(key => {
         if (typeof obj[key] === 'undefined') {
             obj[key] = defaults[key];
         }
