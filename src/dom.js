@@ -1,3 +1,5 @@
+import { merge } from './validator';
+
 export const getFormData = formEl => {
     const data = {};
     const inputEls = formEl.querySelectorAll('input, textarea');
@@ -86,4 +88,38 @@ export const lazyloadImage = () => {
 
     window.addEventListener('scroll', loadViewedImage, false);
     window.addEventListener('load', loadViewedImage, false);
+};
+
+const setButtonStatus = (targetEl, isValid) => {
+    if (isValid) {
+        targetEl.classList.remove('disable');
+        targetEl.setAttribute('disabled', false);
+    } else {
+        targetEl.classList.add('disable');
+        targetEl.setAttribute('disabled', true);
+    }
+};
+
+export const countDownBtn = (targetEl, options) => {
+    const defaultOptions = {
+        time: 60,
+        processText: (countDownTime) => `${countDownTime}s后重发`,
+        endText: '重新获取验证码',
+    };
+    options = merge(options, defaultOptions);
+    targetEl.innerText = options.processText(options.time);
+    setButtonStatus(targetEl, false);
+
+    // 开始倒计时
+    let countDownTime = options.time;
+    const cdInterval = window.setInterval(() => {
+        if (countDownTime > 0) {
+            countDownTime -= 1;
+            targetEl.innerText = options.processText(countDownTime);
+        } else {
+            window.clearInterval(cdInterval);
+            targetEl.innerText = options.endText;
+            setButtonStatus(targetEl, true);
+        }
+    }, 1000);
 };
