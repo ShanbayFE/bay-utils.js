@@ -103,11 +103,11 @@ const setButtonStatus = (targetEl, isValid) => {
 export const countDownBtn = (targetEl, options) => {
     const defaultOptions = {
         time: 60,
-        processText: (countDownTime) => `${countDownTime}s后重发`,
+        getProcessText: (countDownTime) => `${countDownTime}s后重发`,
         endText: '重新获取验证码',
     };
     options = merge(options, defaultOptions);
-    targetEl.innerText = options.processText(options.time);
+    targetEl.innerText = options.getProcessText(options.time);
     setButtonStatus(targetEl, false);
 
     // 开始倒计时
@@ -115,7 +115,7 @@ export const countDownBtn = (targetEl, options) => {
     const cdInterval = window.setInterval(() => {
         if (countDownTime > 0) {
             countDownTime -= 1;
-            targetEl.innerText = options.processText(countDownTime);
+            targetEl.innerText = options.getProcessText(countDownTime);
         } else {
             window.clearInterval(cdInterval);
             targetEl.innerText = options.endText;

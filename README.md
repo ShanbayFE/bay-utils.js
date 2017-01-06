@@ -178,6 +178,16 @@ xbayUtils.isMobileUA(navigator.userAgent);
      */
      lazyloadImage();
 
+### countDownBtn
+    /**
+     * 按钮倒计时
+     * @param {element} el 按钮元素
+     * @param {object} options 选项，具体如下：
+     *    time： 倒计时时间，默认为 60，单位为 s
+     *    getProcessText： 倒计时时每隔 1s 的调用，传入倒计时剩余的秒数，返回需要显示的文字，默认为 countDownTime  => `${countDownTime}s后重发`,
+     *    endText： 倒计时结束的文字，默认为'重新获取验证码'
+    **/
+
 
 ## Others
 
