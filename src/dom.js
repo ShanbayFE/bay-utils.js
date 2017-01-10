@@ -122,4 +122,5 @@ export const countDownBtn = (targetEl, options) => {
             setButtonStatus(targetEl, true);
         }
     }, 1000);
+    return cdInterval;
 };
