@@ -54,6 +54,42 @@ xbayUtils.isMobileUA(navigator.userAgent);
      */
      const dateStr = formatDate(date);
 
+### formatSafetyStr
+    /**
+     * 获取一部分为明文的字符串
+     * @param {string} str 字符串
+     * @param {number} start 截取字符串符号的开始位置，从字符串开始计算，以 1 开始
+     * @param {number} end 截取字符串符号的结束位置，从字符串结尾计算，以 1 开始
+     * @param {string} symbol 截取字符串符号，默认为 *
+     * @return {string} str 一部分为明文的字符串，比如：1****com
+     */
+     > formatSafetyStr('12345com', 1, 3);
+     > '1****com'
+
+### formatSafetyEmail
+    /**
+     * 获取一部分为明文的邮箱地址
+     * @param {string} email 邮箱地址
+     * @param {number} start 同 formatSafetyStr，默认值为邮箱地址长度的 1/4
+     * @param {number} end 同 formatSafetyStr，默认值为邮箱地址长度的 1/4
+     * @param {string} symbol 截取字符串符号，默认为 *
+     * @return {string} str 一部分为明文的邮箱地址，比如：1****com
+     */
+     > formatSafetyEmail('1234567@qq.com')
+     > '123********com'
+
+### formatSafetyMobilephone
+    /**
+     * 获取一部分为明文的电话号码
+     * @param {string} mobilephone 电话号码
+     * @param {number} start 同 formatSafetyStr，默认值为 3
+     * @param {number} end 同 formatSafetyStr，默认值为 4
+     * @param {string} symbol 截取字符串符号，默认为 *
+     * @return {string} str 一部分为明文的电话号码，比如：181****3344
+     */
+     > formatSafetyMobilephone('18111223344');
+     > '181****3344'
+
 ## Validator
 
 ### assertString
@@ -177,6 +213,17 @@ xbayUtils.isMobileUA(navigator.userAgent);
      * 图片懒加载
      */
      lazyloadImage();
+
+### countDownBtn
+    /**
+     * 按钮倒计时
+     * @param {element} el 按钮元素
+     * @param {object} options 选项，具体如下：
+     *    time： 倒计时时间，默认为 60，单位为 s
+     *    getProcessText： 倒计时时每隔 1s 的调用，传入倒计时剩余的秒数，返回需要显示的文字，默认为 countDownTime  => `${countDownTime}s后重发`,
+     *    endText： 倒计时结束的文字，默认为'重新获取验证码'
+     * @return {string} cdInterval 倒计时标记
+    **/
 
 
 ## Others

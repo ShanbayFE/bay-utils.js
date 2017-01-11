@@ -34,4 +34,27 @@ describe('format', () => {
             assert.equal(xbayCommon.formatDate(date), dateFormated);
         });
     });
+
+    describe('formatSafetyStr', () => {
+        it('should return replaced string by symbol', () => {
+            assert.equal(xbayCommon.formatSafetyStr('123454321', 1, 3), '1*****321');
+            assert.equal(xbayCommon.formatSafetyStr('123454321', 2, 3, '-'), '12----321');
+            assert.equal(xbayCommon.formatSafetyStr('123454321', 7, 6, '-'), '123454321');
+        });
+    });
+
+    describe('formatSafetyEmail', () => {
+        it('should return replaced email by symbol', () => {
+            assert.equal(xbayCommon.formatSafetyEmail('1234567@qq.com'), '123********com');
+            assert.equal(xbayCommon.formatSafetyEmail('123@163.com', undefined, 4), '12*****.com');
+            assert.equal(xbayCommon.formatSafetyEmail('1231231231@qq.com', 2, 5), '12**********q.com');
+        });
+    });
+
+    describe('formatSafetyMobilephone', () => {
+        it('should return replaced email by symbol', () => {
+            assert.equal(xbayCommon.formatSafetyMobilephone('18111223344'), '181****3344');
+            assert.equal(xbayCommon.formatSafetyMobilephone('18111223344', 2), '18*****3344');
+        });
+    });
 });
