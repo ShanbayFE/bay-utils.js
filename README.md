@@ -125,6 +125,16 @@ xbayUtils.isMobileUA(navigator.userAgent);
     > isMobileUA(navigator.userAgent)
     > false
 
+### isAndroidUA
+    判断 Agent 是否是 Android
+    > isAndroidUA(navigator.userAgent)
+    > false
+
+### isIOSUA
+    判断 Agent 是否是 iOS
+    > isIOSUA(navigator.userAgent)
+    > false
+
 ### isShanbayAppUA
     判断 Agent 是否是扇贝 APP
     > isShanbayAppUA(navigator.userAgent)
@@ -177,6 +187,31 @@ xbayUtils.isMobileUA(navigator.userAgent);
     > false
 
 ## Dom
+
+### hasClass
+    /**
+     * 判断元素是否有某个 class
+     * @param {element} el 元素
+     * @param {string} className
+     * @return {boolean}
+     */
+    hasClass(el, 'foo');
+
+### addClass
+    /**
+     * 给元素添加某个 class
+     * @param {element} el 元素
+     * @param {string} className 添加的 class
+     */
+    addClass(el, 'foo');
+
+### removeClass
+    /**
+     * 给元素删除某个 class
+     * @param {element} el 元素
+     * @param {string} className 删除的 class
+     */
+    removeClass(el, 'foo');
 
 ### getFormData
     /**
