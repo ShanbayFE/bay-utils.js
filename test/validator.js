@@ -1,7 +1,7 @@
 /* eslint max-len: "off" */
 
 const assert = require('chai').assert;
-import * as xbayCommon from '../src/index';
+import * as bayUtils from '../src/index';
 
 const test = (options) => {
     const args = options.args || [];
@@ -10,15 +10,15 @@ const test = (options) => {
         if (options.valid) {
             options.valid.forEach((valid) => {
                 args[0] = valid;
-                const warning = `xbayCommon.${options.validator}(${valid}, ${args.join(',')}) failed but should have passed`;
-                assert.equal(xbayCommon[options.validator](...args), true, warning);
+                const warning = `bayUtils.${options.validator}(${valid}, ${args.join(',')}) failed but should have passed`;
+                assert.equal(bayUtils[options.validator](...args), true, warning);
             });
         }
         if (options.invalid) {
             options.invalid.forEach((invalid) => {
                 args[0] = invalid;
-                const warning = `xbayCommon.${options.validator}(${invalid}, ${args.join(',')}) passed but should have failed`;
-                assert.equal(xbayCommon[options.validator](...args), false, warning);
+                const warning = `bayUtils.${options.validator}(${invalid}, ${args.join(',')}) passed but should have failed`;
+                assert.equal(bayUtils[options.validator](...args), false, warning);
             });
         }
     });
@@ -27,23 +27,23 @@ const test = (options) => {
 describe('validator', () => {
     describe('assertString', () => {
         it('should throw error if it isn\'t string', () => {
-            assert.isUndefined(xbayCommon.assertString('123'));
-            assert.throws(xbayCommon.assertString);
+            assert.isUndefined(bayUtils.assertString('123'));
+            assert.throws(bayUtils.assertString);
         });
     });
 
     describe('toString', () => {
         it('should return string', () => {
-            assert.equal(xbayCommon.toString('miaomiao'), 'miaomiao'); // 字符串
-            assert.equal(xbayCommon.toString(123), '123'); // 数字
-            assert.equal(xbayCommon.toString([1, 'miao', 3, 'ice']), '1,miao,3,ice'); // 数组
-            assert.equal(xbayCommon.toString({ x: 1, y: 'ice' }), '[object Object]'); // 对象
+            assert.equal(bayUtils.toString('miaomiao'), 'miaomiao'); // 字符串
+            assert.equal(bayUtils.toString(123), '123'); // 数字
+            assert.equal(bayUtils.toString([1, 'miao', 3, 'ice']), '1,miao,3,ice'); // 数组
+            assert.equal(bayUtils.toString({ x: 1, y: 'ice' }), '[object Object]'); // 对象
             assert.equal(
-                xbayCommon.toString(new Date('2016-08')),
+                bayUtils.toString(new Date('2016-08')),
                 'Mon Aug 01 2016 08:00:00 GMT+0800 (CST)'
             ); // 日期
-            assert.equal(xbayCommon.toString(() => {}), ''); // 函数
-            assert.equal(xbayCommon.toString(undefined), ''); // undefined
+            assert.equal(bayUtils.toString(() => {}), ''); // 函数
+            assert.equal(bayUtils.toString(undefined), ''); // undefined
         });
     });
 
@@ -64,12 +64,12 @@ describe('validator', () => {
                 month: 12,
                 year: 2017,
             };
-            assert.deepEqual(xbayCommon.merge(a, b), c);
+            assert.deepEqual(bayUtils.merge(a, b), c);
         });
     });
 
     describe('isStandardBrowserEnv', () => {
-        assert.equal(xbayCommon.isStandardBrowserEnv(), false);
+        assert.equal(bayUtils.isStandardBrowserEnv(), false);
     });
 
     describe('isFunction', () => {
@@ -88,6 +88,8 @@ describe('validator', () => {
     const mobileAgent = 'AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143';
     const shanbayAgent = 'com.shanbay.words/7.5.900 (Android,4.4.4,MI 3W,Xiaomi; Frontend/1.1)';
     const wechatAgent = 'micromessenger/3.2.1(Android,4.4.4,MI 3W,Xiaomi; Frontend/1.1) Chrome/55.0.2883.95';
+    const androidAgent = 'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) Chrome/55.0.2883.95 Mobile Safari/537.36';
+    const iOSAgent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) Version/9.0 Mobile/13B143 Safari/601.1';
 
     describe('isWechatUA', () => {
         test({
@@ -102,6 +104,22 @@ describe('validator', () => {
             validator: 'isMobileUA',
             valid: [shanbayAgent, mobileAgent, wechatAgent],
             invalid: [pcAgent],
+        });
+    });
+
+    describe('isAndroidUA', () => {
+        test({
+            validator: 'isAndroidUA',
+            valid: [androidAgent],
+            invalid: [pcAgent, iOSAgent],
+        });
+    });
+
+    describe('isIOSUA', () => {
+        test({
+            validator: 'isIOSUA',
+            valid: [iOSAgent],
+            invalid: [pcAgent, androidAgent],
         });
     });
 
@@ -165,13 +183,13 @@ describe('validator', () => {
 
     describe('escapeStr', () => {
         it('should transfor some symbol to string', () => {
-            assert.equal(xbayCommon.escapeStr('<p>miao miao</p>'), '&lt;p&gt;miao miao&lt;&#x2F;p&gt;');
+            assert.equal(bayUtils.escapeStr('<p>miao miao</p>'), '&lt;p&gt;miao miao&lt;&#x2F;p&gt;');
         });
     });
 
     describe('unescapeStr', () => {
         it('should transfor some symbol to string', () => {
-            assert.equal(xbayCommon.unescapeStr('&lt;p&gt;miao miao&lt;&#x2F;p&gt;'), '<p>miao miao</p>');
+            assert.equal(bayUtils.unescapeStr('&lt;p&gt;miao miao&lt;&#x2F;p&gt;'), '<p>miao miao</p>');
         });
     });
 

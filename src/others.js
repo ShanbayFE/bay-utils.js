@@ -43,7 +43,7 @@ export const ajax = (options, isOriginal = false, configure) => {
             }
         },
         error: (xhr, textStatus) => {
-            options.error && options.error(xhr.status, textStatus);
+            options.error && options.error(xhr.status, `${textStatus}(${xhr.status})`);
         },
     };
 
