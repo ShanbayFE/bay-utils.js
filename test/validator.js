@@ -89,7 +89,7 @@ describe('validator', () => {
     const shanbayAgent = 'com.shanbay.words/7.5.900 (Android,4.4.4,MI 3W,Xiaomi; Frontend/1.1)';
     const wechatAgent = 'micromessenger/3.2.1(Android,4.4.4,MI 3W,Xiaomi; Frontend/1.1) Chrome/55.0.2883.95';
     const androidAgent = 'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) Chrome/55.0.2883.95 Mobile Safari/537.36';
-    const iOSAgent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) Version/9.0 Mobile/13B143 Safari/601.1';
+    const iOSAgent = 'Mozilla/5.0 (iPhone; CPU iPHone OS 9_1 like Mac OS X) Version/9.0 Mobile/13B143 Safari/601.1';
 
     describe('isWechatUA', () => {
         test({

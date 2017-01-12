@@ -47,7 +47,7 @@ export const isAndroidUA = (agent) =>
     /(android)/i.test(agent);
 
 export const isIOSUA = (agent) =>
-    /iPad|iPhone|iPod/.test(agent);
+    /iPad|iPhone|iPod/i.test(agent);
 
 export const isShanbayAppUA = (agent) =>
     /com\.shanbay/.test(agent.toLowerCase());
