@@ -15,6 +15,7 @@ export const getCookie = (cookie, name) => {
 };
 
 export const ajax = (options, isOriginal = false, configure) => {
+    $.support.cors = true;
     const config = $.extend({}, {
         LOGIN_URL: '/accounts/login',
     }, configure);
