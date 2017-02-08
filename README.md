@@ -288,3 +288,27 @@ xbayUtils.isMobileUA(navigator.userAgent);
     * @param {string} name 名称
     */
     const value = getCookie(cookie, name);
+
+### uniqArr
+    /**
+    * 对 array 去重
+    * @param {Array} 原数组
+    * @return {Array} 新数组
+    */
+    const newArr = uniqArr(arr);
+
+### getUrlsFromStr
+    /**
+    * 获取 string 中的 urls
+    * @param {String} 字符串
+    * @return {Array} 包含 url 的数组
+    */
+    const urlsArr = getUrlsFromStr(str);
+
+### transformUrlToAnchor
+    /**
+    * 将字符串中的 url 转化成 html 中的 a 元素
+    * @params {String} 字符串
+    * @return {String} 包含 a 元素的字符串
+    */
+    const newStr = transformUrlToAnchor(str);
