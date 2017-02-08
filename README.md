@@ -1,6 +1,6 @@
 # bay-utils.js
 
-> A Common Functions Library for Javascript
+> A Javascript Common Functions Library
 
 This project is **working in progress**.
 
