@@ -10,7 +10,12 @@
         "no-param-reassign": 0
     },
     "globals": {
+        "$": true,
         "describe": true,
         "it": true,
+    },
+    "env": {
+        "browser": true,
+        "node": true,
     }
 }
