@@ -1,7 +1,7 @@
 import { formatDate } from './format';
 
 export const getSearchValue = (searchName, url = window.location.href) => {
-    const name = searchName.replace(/[\[\]]/g, '\\$&');
+    const name = searchName.replace(/[[\]]/g, '\\$&');
     const regex = new RegExp(`[?&]${name}(=([^&#]*)|&|#|$)`);
     const results = regex.exec(url);
     if (!results) return null;
@@ -34,15 +34,13 @@ export const ajax = (options, isOriginal = false, configure) => {
     };
 
     const primaryOptions = {
-        success: json => {
+        success: (json) => {
             if (json.status_code === 401 || json.status_code === 403) {
                 window.location.href = `${config.LOGIN_URL}/?next=${location.pathname}${location.search}`;
+            } else if (json.status_code === 0) {
+                options.success && options.success(json.data);
             } else {
-                if (json.status_code === 0) {
-                    options.success && options.success(json.data);
-                } else {
-                    options.error && options.error(json.status_code, json.msg || '请求失败，请稍后重试');
-                }
+                options.error && options.error(json.status_code, json.msg || '请求失败，请稍后重试');
             }
         },
         error: (xhr, textStatus) => {
@@ -77,4 +75,39 @@ export const getFrontendVersion = (userAgent = window.navigator.userAgent) => {
     }
 
     return parseFloat(uaFrontEndKey[0].replace(/Frontend\//gi, ''));
+};
+
+/*
+ * @params str {String}
+ * @return urls {Array}
+ */
+export const getUrlsFromStr = (str) => {
+    const urlPattern = new RegExp('https?:\\/\\/[-A-Za-z0-9+&@#\\/%?=~_|!:,.;]+[-A-Za-z0-9+&@#\\/%=~_|]', 'ig');
+    return str.match(urlPattern);
+};
+
+export const uniqArr = arr => [...new Set(arr)];
+// export const uniqArr = (arr) => {
+    // const newArr = [];
+    // arr.forEach((item, index) => {
+    //     const firstIndex = arr.indexOf(item);
+    //     if (firstIndex === index && arr[firstIndex] === item) {
+    //         newArr.push(item);
+    //     }
+    // });
+    // return newArr;
+// }
+
+/*
+ * @params str {String}
+ * @return newStr {String}
+ */
+export const transformUrlToAnchor = (str) => {
+    let newStr = str;
+    const urls = uniqArr(getUrlsFromStr(str));
+    urls.forEach((url) => {
+        const anchor = `<a href='${url}' target='_blank'>${url}</a>`;
+        newStr = newStr.replace(new RegExp(`${url}`, 'gi'), anchor);
+    });
+    return newStr;
 };
