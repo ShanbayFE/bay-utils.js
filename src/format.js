@@ -6,20 +6,50 @@ export const parseDate = (time) => {
     return new Date(time);
 };
 
-// TODO: 支持自定义格式
-export const formatDate = date => {
-    const dateTime = parseDate(date);
+export const pad = (n, length, symbol) =>
+    (n.length >= length ? n : new Array(length - n.length + 1).join(symbol) + n);
+
+export const formatDate = (date, format = 'yyyy-MM-dd') => {
+    const newDate = parseDate(date);
     const dateMap = {
-        y: dateTime.getFullYear(),
-        m: dateTime.getMonth() + 1,
-        d: dateTime.getDate(),
+        y: newDate.getFullYear(),
+        M: newDate.getMonth() + 1,
+        d: newDate.getDate(),
+        h: newDate.getHours(),
+        m: newDate.getMinutes(),
+        s: newDate.getSeconds(),
+        S: newDate.getMilliseconds(),
     };
-    Object.keys(dateMap).forEach(key => {
-        if (dateMap[key] < 10) {
-            dateMap[key] = `0${dateMap[key]}`;
+    const dateStr = format.replace(/([yMdhmsqS])+/g, (match, key) => {
+        let dateItem = dateMap[key];
+        const matchLen = match.length;
+
+        if (dateItem === undefined) {
+            return match;
         }
+
+        dateItem = dateItem.toString();
+
+        // 当长度不够时，用 0 填充
+        if (matchLen > dateItem.length) {
+            return pad(dateItem, matchLen, 0);
+        }
+
+        // 只有 year 可以截取，其他都无法截取
+        if (key === 'y') {
+            return dateItem.substr(dateItem.length - matchLen);
+        }
+
+        return dateItem;
     });
-    return [dateMap.y, dateMap.m, dateMap.d].join('-');
+    return dateStr;
+};
+
+export const trimString = (text, limit, symbol = '...') => {
+    if (text.length <= limit) {
+        return text;
+    }
+    return text.slice(0, limit) + symbol;
 };
 
 export const formatSafetyStr = (str, start, end, symbol = '*') => {

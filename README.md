@@ -50,9 +50,33 @@ xbayUtils.isMobileUA(navigator.userAgent);
     /**
      * 获取某一格式的日期
      * @param {string} date 日期
-     * @return {string} dateStr 格式为 y-m-d 的日期
+     * @param {string} format 自定义格式，默认为 yyyy-MM-dd
+        比如： yyyy-MM-dd hh:mm:ss SSS 或者 yy年MM月dd日 hh时mm分ss秒 SSS毫秒
+     * @return {string} dateStr 格式为 format 的日期
      */
-     const dateStr = formatDate(date);
+     > formatDate('2016-08-09 08:01:23');
+     > 2016-08-09
+
+     > formatDate('2016-11-09 08:01:23', 'yyyy.M.d');
+     > 2016.11.9
+
+     > formatDate(new Date('2016-08-09 08:01:23'), 'yy年MM月dd日');
+     > 16年08月09日
+
+     > formatDate(new Date('2016-08-09 08:01:23'), 'yyyy年MM月dd日 hh小时mm分钟ss秒');
+     > 2016年08月09日 08时01分23秒
+
+### trimString
+    /**
+     * 截取字符串
+     * @param {string} str 字符串
+     * @param {number} length 截取长度
+     * @return {string} symbol 截取字符串代表剩余部分的符号，默认为'...'
+     */
+     > trimString('China will', 3);
+     > Chi...
+     > trimString('China will', 3, '***');
+     > Chi***
 
 ### formatSafetyStr
     /**
@@ -186,6 +210,16 @@ xbayUtils.isMobileUA(navigator.userAgent);
     > isEmptyStr('123');
     > false
 
+### isEmptyObj
+    判断是否为空对象
+    > isEmptyObj({});
+    > true
+
+### isArray
+    判断是否为数组
+    > isArray([]);
+    > true
+
 ## Dom
 
 ### hasClass
@@ -288,3 +322,22 @@ xbayUtils.isMobileUA(navigator.userAgent);
     * @param {string} name 名称
     */
     const value = getCookie(cookie, name);
+
+### getDayDiff
+    /**
+    * 获取两个日期相差的天数
+    * @param {string} day1 日期
+    * @param {string} day2 日期
+    * @return {number} dayDiff 相差的天数
+    */
+    > getDayDiff('2017-2-11', '2017-2-12');
+    > 1
+
+### getFrontendVersion
+    /**
+    * 获取 Frontend 版本号
+    * @params {object} ua userAgent，默认为 window.navigator.userAgent
+    * @return {string} version 版本号
+    */
+    > getFrontendVersion();
+    > 1.1
