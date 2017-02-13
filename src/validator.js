@@ -137,3 +137,8 @@ export const isEmptyStr = (str) => {
     assertString(str);
     return str.length === 0;
 };
+
+export const isEmptyObj = (obj) => !Object.keys(obj).length;
+
+export const isArray = (obj) =>
+  Object.prototype.toString.call(obj) === '[object Array]';

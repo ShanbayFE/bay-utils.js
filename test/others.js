@@ -18,6 +18,34 @@ describe('others', () => {
         });
     });
 
+    describe('getDayDiff', () => {
+        it('get diff between days', () => {
+            const dataArr = [{
+                day1: '2017-2-10 20:20',
+                day2: '2017-2-11',
+                dayDiff: 1,
+            }, {
+                day1: '2017-2-11',
+                day2: '2017-2-10 02:22',
+                dayDiff: -1,
+            }, {
+                day1: '2017-2-10 20:20',
+                day2: '2017-2-12 00:00',
+                dayDiff: 2,
+            }];
+            dataArr.forEach(data => {
+                assert.equal(bayUtils.getDayDiff(data.day1, data.day2), data.dayDiff);
+            });
+        });
+    });
+
+    describe('getFrontendVersion', () => {
+        const shanbayAgent = 'com.shanbay.words/7.5.900 (Android,4.4.4,MI 3W,Xiaomi; Frontend/1.1)';
+        it('get app Frontend Version', () => {
+            assert.equal(bayUtils.getFrontendVersion(shanbayAgent), '1.1');
+        });
+    });
+
     describe('getUrlsFromString', () => {
         it('get urls from string', () => {
             const string = 'https://www.google.com/q/qwe/a i like google, I like stackoverflow too. https://stackoverflow.com/qwe?qwe=ee';

@@ -1,6 +1,15 @@
 const assert = require('chai').assert;
 import * as bayUtils from '../src/index';
 
+const test = (func, dataArr) => {
+    it('should return correct result', () => {
+        dataArr.forEach((data, index) => {
+            const { params, result } = data;
+            assert.equal(bayUtils[func](params[0], params[1], params[2]), result, `error: ${index}`);
+        });
+    });
+};
+
 describe('format', () => {
     describe('parseDate', () => {
         let date;
@@ -19,20 +28,37 @@ describe('format', () => {
     });
 
     describe('formatDate', () => {
-        let date;
-        let dateFormated;
-        it('should return string', () => {
-            date = '2016-08-08T10:15:43+0000';
-            dateFormated = '2016-08-08';
-            assert.equal(bayUtils.formatDate(date), dateFormated);
+        const dataArr = [{
+            params: ['2016-08-08T10:15:43+0000'],
+            result: '2016-08-08',
+        }, {
+            params: ['2016-08-09', 'yy年MM月dd日'],
+            result: '16年08月09日',
+        }, {
+            params: ['2016-08-09', 'yy年M月d日'],
+            result: '16年8月9日',
+        }, {
+            params: ['2016-11-19', 'yy年M月d日'],
+            result: '16年11月19日',
+        }, {
+            params: ['2016-08-09 08:01:23', 'yy.M.d hh:m ss秒 SSS毫秒'],
+            result: '16.8.9 08:1 23秒 000毫秒',
+        }, {
+            params: [new Date('2016-08-09 13:44:23'), 'yy.w.dd'],
+            result: '16.w.09',
+        }];
+        test('formatDate', dataArr);
+    });
 
-            date = '2016-08-09';
-            assert.equal(bayUtils.formatDate(date), date);
-
-            date = new Date('2016-08-09');
-            dateFormated = '2016-08-09';
-            assert.equal(bayUtils.formatDate(date), dateFormated);
-        });
+    describe('trimString', () => {
+        const dataArr = [{
+            params: ['China will fingerprint foreigners', 3],
+            result: 'Chi...',
+        }, {
+            params: ['China will fingerprint foreigners', 3, '***'],
+            result: 'Chi***',
+        }];
+        test('trimString', dataArr);
     });
 
     describe('formatSafetyStr', () => {
