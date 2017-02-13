@@ -20,7 +20,7 @@ export const formatDate = (date, format = 'yyyy-MM-dd') => {
         s: newDate.getSeconds(),
         S: newDate.getMilliseconds(),
     };
-    const dateStr = format.replace(/([yMdhmsqS])+/g, (match, key) => {
+    const dateStr = format.replace(/([yMdhmsS])+/g, (match, key) => {
         let dateItem = dateMap[key];
         const matchLen = match.length;
 
