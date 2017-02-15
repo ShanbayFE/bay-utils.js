@@ -9,18 +9,20 @@ export const parseDate = (time) => {
 export const pad = (n, length, symbol) =>
     (n.length >= length ? n : new Array(length - n.length + 1).join(symbol) + n);
 
-export const formatDate = (date, format = 'yyyy-MM-dd') => {
+export const formatDate = (date, format = 'yyyy-MM-DD') => {
+    const weekdays = '日_一_二_三_四_五_六'.split('_');
     const newDate = parseDate(date);
     const dateMap = {
         y: newDate.getFullYear(),
         M: newDate.getMonth() + 1,
-        d: newDate.getDate(),
+        D: newDate.getDate(),
+        d: newDate.getDay(),
         h: newDate.getHours(),
         m: newDate.getMinutes(),
         s: newDate.getSeconds(),
         S: newDate.getMilliseconds(),
     };
-    const dateStr = format.replace(/([yMdhmsS])+/g, (match, key) => {
+    const dateStr = format.replace(/([yMDdhmsS])+/g, (match, key) => {
         let dateItem = dateMap[key];
         const matchLen = match.length;
 
@@ -29,6 +31,10 @@ export const formatDate = (date, format = 'yyyy-MM-dd') => {
         }
 
         dateItem = dateItem.toString();
+
+        if (match === 'd') {
+            return weekdays[dateItem];
+        }
 
         // 当长度不够时，用 0 填充
         if (matchLen > dateItem.length) {
@@ -43,6 +49,14 @@ export const formatDate = (date, format = 'yyyy-MM-dd') => {
         return dateItem;
     });
     return dateStr;
+};
+
+formatDate.locale = (language, config) => {
+    if (arguments.length === 2) {
+        formatDate[language] = config;
+    } else {
+        formatDate.curLanguage = language;
+    }
 };
 
 export const trimString = (text, limit, symbol = '...') => {
