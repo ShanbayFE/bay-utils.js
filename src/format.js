@@ -51,14 +51,6 @@ export const formatDate = (date, format = 'yyyy-MM-DD') => {
     return dateStr;
 };
 
-formatDate.locale = (language, config) => {
-    if (arguments.length === 2) {
-        formatDate[language] = config;
-    } else {
-        formatDate.curLanguage = language;
-    }
-};
-
 export const trimString = (text, limit, symbol = '...') => {
     if (text.length <= limit) {
         return text;
