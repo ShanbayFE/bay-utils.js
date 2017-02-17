@@ -32,20 +32,23 @@ describe('format', () => {
             params: ['2016-08-08T10:15:43+0000'],
             result: '2016-08-08',
         }, {
-            params: ['2016-08-09', 'yy年MM月dd日'],
+            params: ['2016-08-09', 'yy年MM月DD日'],
             result: '16年08月09日',
         }, {
-            params: ['2016-08-09', 'yy年M月d日'],
+            params: ['2016-08-09', 'yy年M月D日'],
             result: '16年8月9日',
         }, {
-            params: ['2016-11-19', 'yy年M月d日'],
+            params: ['2016-11-19', 'yy年M月D日'],
             result: '16年11月19日',
         }, {
-            params: ['2016-08-09 08:01:23', 'yy.M.d hh:m ss秒 SSS毫秒'],
+            params: ['2016-08-09 08:01:23', 'yy.M.D hh:m ss秒 SSS毫秒'],
             result: '16.8.9 08:1 23秒 000毫秒',
         }, {
-            params: [new Date('2016-08-09 13:44:23'), 'yy.w.dd'],
+            params: [new Date('2016-08-09 13:44:23'), 'yy.w.DD'],
             result: '16.w.09',
+        }, {
+            params: ['2017-02-19T10:15:43+0000', 'd'], // 周日
+            result: '日',
         }];
         test('formatDate', dataArr);
     });
