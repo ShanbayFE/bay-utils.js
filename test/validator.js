@@ -264,4 +264,20 @@ describe('validator', () => {
             ],
         });
     });
+
+    describe('isEmptyObj', () => {
+        test({
+            validator: 'isEmptyObj',
+            valid: [{}],
+            invalid: [{ a: '2' }],
+        });
+    });
+
+    describe('isArray', () => {
+        test({
+            validator: 'isArray',
+            valid: [[1, 2, 3], ['a', 'b', 'c']],
+            invalid: [{ a: '2' }, 'miao'],
+        });
+    });
 });

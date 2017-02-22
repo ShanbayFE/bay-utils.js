@@ -1,3 +1,5 @@
+import { formatDate } from './format';
+
 export const getSearchValue = (searchName, url = window.location.href) => {
     const name = searchName.replace(/[[\]]/g, '\\$&');
     const regex = new RegExp(`[?&]${name}(=([^&#]*)|&|#|$)`);
@@ -17,7 +19,7 @@ export const getCookie = (cookie, name) => {
 export const ajax = (options, isOriginal = false, configure) => {
     $.support.cors = true;
     const config = $.extend({}, {
-        LOGIN_URL: '/accounts/login',
+        LOGIN_URL: '/web/accounts/login',
     }, configure);
 
     const defaultOptions = {
@@ -46,7 +48,6 @@ export const ajax = (options, isOriginal = false, configure) => {
         },
     };
 
-
     if (options.data && typeof options.data === 'object') {
         options.data = JSON.stringify(options.data); // eslint-disable-line
     }
@@ -59,6 +60,22 @@ export const ajax = (options, isOriginal = false, configure) => {
 
 // export const getAppVersions = (userAgent = navigator.userAgent) =>
 //     userAgent.match(/shanbayappversion\/(\d+)\s/);
+
+export const getDayDiff = (day1, day2) => {
+    const newDay1 = new Date(formatDate(day1));
+    const newDay2 = new Date(formatDate(day2));
+    return Math.floor((new Date(newDay2) - new Date(newDay1)) / (1000 * 60 * 60 * 24));
+};
+
+export const getFrontendVersion = (userAgent = window.navigator.userAgent) => {
+    const uaFrontEndKey = userAgent.match(/Frontend\/(\d+).(\d+)/gi);
+
+    if (!uaFrontEndKey || !uaFrontEndKey.length) {
+        return null;
+    }
+
+    return parseFloat(uaFrontEndKey[0].replace(/Frontend\//gi, ''));
+};
 
 /*
  * @params str {String}
