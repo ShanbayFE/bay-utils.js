@@ -31,7 +31,7 @@ The easiest way to use utils is to load the built script:
 Having include the dependencies, the library can be used:
 
 ```js
-xbayUtils.isMobileUA(navigator.userAgent);
+bayUtils.isMobileUA(navigator.userAgent);
 ```
 
 # Usage
