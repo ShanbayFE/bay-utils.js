@@ -82,10 +82,14 @@ export const copyToClipboard = (text) => {
     element.remove();
 };
 
-export const lazyloadImage = () => {
+export const lazyloadImage = (threshold = 100) => {
+    /*
+     * Note: The images which need lazyload must have 'data-src' property
+     * @params threshold {Number} preload image before it shown
+     */
     const requestAnimationFrame = window.requestAnimationFrame ||
         window.webkitRequestAnimationFrame;
-    const imageEls = document.querySelectorAll('img');
+    const imageEls = document.querySelectorAll('img[data-src]');
 
     const loadImage = (el) => {
         if (el.getAttribute('loaded')) {
@@ -103,7 +107,7 @@ export const lazyloadImage = () => {
                 const elTop = el.getBoundingClientRect().top;
                 const documentHeight = window.innerHeight;
 
-                if (elTop < documentHeight) {
+                if (elTop - threshold < documentHeight) {
                     loadImage(el);
                 }
             });
