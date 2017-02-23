@@ -48,7 +48,7 @@ export const ajax = (options, isOriginal = false, configure) => {
         },
     };
 
-    if (options.data && typeof options.data === 'object') {
+    if (options.data && typeof options.data === 'object' && options.type === 'POST') {
         options.data = JSON.stringify(options.data); // eslint-disable-line
     }
     if (isOriginal) {
