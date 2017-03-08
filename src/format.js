@@ -77,3 +77,44 @@ export const formatSafetyEmail = (email, start, end, symbol) => {
 
 export const formatSafetyMobilephone = (mobilephone, start = 3, end = 4, symbol) =>
     formatSafetyStr(mobilephone, start, end, symbol);
+
+/**
+ * @param {string} time iso foramt string
+ * @param {object} config
+ */
+export const fromNow = (time, config = {}) => {
+    const updateTime = parseDate(time).getTime();
+    const currentTime = new Date().getTime();
+
+    const delayTime = (() => {
+        if (config.boundTime) {
+            return parseDate(config.boundTime).getTime();
+        }
+        if (config.intervalTime) {
+            const ONE_DAY = 24 * 60 * 60 * 1000;
+            return config.intervalTime * ONE_DAY;
+        }
+        return new Date().getTime();
+    })();
+
+    if ((currentTime - updateTime) >= (currentTime - delayTime)) {
+        return formatDate(updateTime, 'MM月DD日');
+    }
+
+    const ms = Math.floor((currentTime - updateTime) / 1000);
+
+    if (ms === 0) {
+        return '1秒';
+    }
+
+    const d = Math.floor(ms / (60 * 60 * 24));
+    const h = Math.floor(ms / (60 * 60)) - (d * 24);
+    const m = Math.floor(ms / 60) - (d * 24 * 60) - (h * 60);
+    const s = ms % 60;
+    const days = d ? `${d}天` : '';
+    const hours = h ? `${h}小时` : '';
+    const mins = m ? `${m}分钟` : '';
+    const secs = s ? `${s}秒` : '';
+
+    return `${days}${hours}${mins}${secs} 前`;
+};
