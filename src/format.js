@@ -106,12 +106,12 @@ export const fromNow = (time, now) => {
 
     const hours = diff / ONE_HOUR;
     if (hours >= 1) {
-        return `${Math.round(hours)}小时前`;
+        return `${Math.floor(hours)}小时前`;
     }
 
     const minutes = diff / ONE_MINUTE;
     if (minutes >= 1) {
-        return `${Math.round(minutes)}分钟前`;
+        return `${Math.floor(minutes)}分钟前`;
     }
 
     const seconds = diff / ONE_SECOND;
@@ -119,5 +119,5 @@ export const fromNow = (time, now) => {
         return '刚刚';
     }
 
-    return `${Math.round(seconds)}前`;
+    return `${Math.floor(seconds)}秒前`;
 };
