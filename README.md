@@ -31,7 +31,7 @@ The easiest way to use utils is to load the built script:
 Having include the dependencies, the library can be used:
 
 ```js
-xbayUtils.isMobileUA(navigator.userAgent);
+bayUtils.isMobileUA(navigator.userAgent);
 ```
 
 # Usage
@@ -50,8 +50,8 @@ xbayUtils.isMobileUA(navigator.userAgent);
     /**
      * 获取某一格式的日期
      * @param {string} date 日期
-     * @param {string} format 自定义格式，默认为 yyyy-MM-dd
-        比如： yyyy-MM-dd hh:mm:ss SSS 或者 yy年MM月dd日 hh时mm分ss秒 SSS毫秒
+     * @param {string} format 自定义格式，默认为 yyyy-MM-DD
+        比如： yyyy-MM-DD hh:mm:ss SSS 或者 yy年MM月DD日 hh时mm分ss秒 SSS毫秒
      * @return {string} dateStr 格式为 format 的日期
      */
      > formatDate('2016-08-09 08:01:23');
@@ -60,11 +60,14 @@ xbayUtils.isMobileUA(navigator.userAgent);
      > formatDate('2016-11-09 08:01:23', 'yyyy.M.d');
      > 2016.11.9
 
-     > formatDate(new Date('2016-08-09 08:01:23'), 'yy年MM月dd日');
+     > formatDate(new Date('2016-08-09 08:01:23'), 'yy年MM月DD日');
      > 16年08月09日
 
-     > formatDate(new Date('2016-08-09 08:01:23'), 'yyyy年MM月dd日 hh小时mm分钟ss秒');
+     > formatDate(new Date('2016-08-09 08:01:23'), 'yyyy年MM月DD日 hh小时mm分钟ss秒');
      > 2016年08月09日 08时01分23秒
+
+     > formatDate(new Date('2017-02-16 08:01:23), '星期d');
+     > 星期四
 
 ### trimString
     /**

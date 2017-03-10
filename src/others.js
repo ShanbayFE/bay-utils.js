@@ -19,7 +19,7 @@ export const getCookie = (cookie, name) => {
 export const ajax = (options, isOriginal = false, configure) => {
     $.support.cors = true;
     const config = $.extend({}, {
-        LOGIN_URL: '/accounts/login',
+        LOGIN_URL: '/web/accounts/login',
     }, configure);
 
     const defaultOptions = {
@@ -48,7 +48,7 @@ export const ajax = (options, isOriginal = false, configure) => {
         },
     };
 
-    if (options.data && typeof options.data === 'object') {
+    if (options.data && typeof options.data === 'object' && options.type !== 'GET') {
         options.data = JSON.stringify(options.data); // eslint-disable-line
     }
     if (isOriginal) {
