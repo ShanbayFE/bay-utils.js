@@ -79,42 +79,45 @@ export const formatSafetyMobilephone = (mobilephone, start = 3, end = 4, symbol)
     formatSafetyStr(mobilephone, start, end, symbol);
 
 /**
- * @param {string} time iso foramt string
- * @param {object} config
+ *  fromNow
+ *  @param date iso8601
+ *  @param now  用于测试
  */
-export const fromNow = (time, config = {}) => {
-    const updateTime = parseDate(time).getTime();
-    const currentTime = new Date().getTime();
+export const fromNow = (time, now) => {
+    const ONE_SECOND = 1 * 1000;
+    const ONE_MINUTE = ONE_SECOND * 60;
+    const ONE_HOUR = ONE_MINUTE * 60;
+    const ONE_DAY = ONE_HOUR * 24;
+    const stamp = new Date(time);
 
-    const delayTime = (() => {
-        if (config.boundTime) {
-            return parseDate(config.boundTime).getTime();
-        }
-        if (config.intervalTime) {
-            const ONE_DAY = 24 * 60 * 60 * 1000;
-            return config.intervalTime * ONE_DAY;
-        }
-        return new Date().getTime();
-    })();
-
-    if ((currentTime - updateTime) >= (currentTime - delayTime)) {
-        return formatDate(updateTime, 'MM月DD日');
+    if (!now) {
+        now = new Date();
     }
 
-    const ms = Math.floor((currentTime - updateTime) / 1000);
-
-    if (ms === 0) {
-        return '1秒';
+    if (stamp > now) {
+        return '来自未来';
     }
 
-    const d = Math.floor(ms / (60 * 60 * 24));
-    const h = Math.floor(ms / (60 * 60)) - (d * 24);
-    const m = Math.floor(ms / 60) - (d * 24 * 60) - (h * 60);
-    const s = ms % 60;
-    const days = d ? `${d}天` : '';
-    const hours = h ? `${h}小时` : '';
-    const mins = m ? `${m}分钟` : '';
-    const secs = s ? `${s}秒` : '';
+    const diff = now - stamp;
 
-    return `${days}${hours}${mins}${secs} 前`;
+    if (diff / ONE_DAY >= 1) {
+        return `${stamp.getMonth() + 1}月${stamp.getDate()}日`;
+    }
+
+    const hours = diff / ONE_HOUR;
+    if (hours >= 1) {
+        return `${Math.round(hours)}小时前`;
+    }
+
+    const minutes = diff / ONE_MINUTE;
+    if (minutes >= 1) {
+        return `${Math.round(minutes)}分钟前`;
+    }
+
+    const seconds = diff / ONE_SECOND;
+    if (seconds <= 10) {
+        return '刚刚';
+    }
+
+    return `${Math.round(seconds)}前`;
 };
