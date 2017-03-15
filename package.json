@@ -6,13 +6,15 @@
   "scripts": {
     "prepublish": "npm run compile",
     "test": "npm run compile && mocha -w --compilers js:babel-core/register",
-    "compile": "webpack --display-error-detail --progress && babel -d lib/ src/ --presets=latest"
+    "compile": "webpack --display-error-detail --progress && babel -d lib/ src/ --presets=latest",
+    "coverage": "babel-node node_modules/.bin/babel-istanbul cover _mocha -- --compilers js:babel-core/register"
   },
   "author": "ice",
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-core": "^6.21.0",
+    "babel-istanbul": "^0.12.2",
     "babel-loader": "^6.2.4",
     "babel-preset-latest": "^6.16.0",
     "chai": "^3.5.0",
