@@ -38,6 +38,15 @@ bayUtils.isMobileUA(navigator.userAgent);
 
 ## Format
 
+### fromNow
+    /*
+    *  显示相对时间
+    *  @param {string} time 日期
+    */
+    > time = (new Date(Date.now() - 1)).toISOString();
+    > fromNow(time)
+    > '一秒前'
+
 ### parseDate
     /**
      * 获取一个日期对象

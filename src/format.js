@@ -83,3 +83,47 @@ export const formatSafetyEmail = (email, start, end, symbol) => {
 
 export const formatSafetyMobilephone = (mobilephone, start = 3, end = 4, symbol) =>
     formatSafetyStr(mobilephone, start, end, symbol);
+
+/**
+ *  fromNow
+ *  @param date iso8601
+ *  @param now  用于测试
+ */
+export const fromNow = (time, now) => {
+    const ONE_SECOND = 1 * 1000;
+    const ONE_MINUTE = ONE_SECOND * 60;
+    const ONE_HOUR = ONE_MINUTE * 60;
+    const ONE_DAY = ONE_HOUR * 24;
+    const stamp = parseDate(time);
+
+    if (!now) {
+        now = new Date();
+    }
+
+    if (stamp > now) {
+        return '来自未来';
+    }
+
+    const diff = now - stamp;
+
+    if (diff / ONE_DAY >= 1) {
+        return `${stamp.getMonth() + 1}月${stamp.getDate()}日`;
+    }
+
+    const hours = diff / ONE_HOUR;
+    if (hours >= 1) {
+        return `${Math.floor(hours)}小时前`;
+    }
+
+    const minutes = diff / ONE_MINUTE;
+    if (minutes >= 1) {
+        return `${Math.floor(minutes)}分钟前`;
+    }
+
+    const seconds = diff / ONE_SECOND;
+    if (seconds <= 10) {
+        return '刚刚';
+    }
+
+    return `${Math.floor(seconds)}秒前`;
+};
