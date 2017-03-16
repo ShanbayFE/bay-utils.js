@@ -1,10 +1,14 @@
 export const parseDate = (time) => {
+    // exmaple '2017-03-02T23:49:45Z . or 017-03-02T23:49:45+hh:mm, 017-03-02T23:49:45-hh:mm
+    const isoFormat = /^(\d{4})\-(\d{2})\-(\d{2})T(\d{2}):(\d{2}):(\d{2})(z|[+|-]\d{2}:\d{2})$/;
     // example: '2017-03-02T23:49:45+0800';
     const regex = /^(\d{4})\-(\d{2})\-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\+|\-)(\d{4})$/;
     // example: '2017-03-02T23:49:45';
     const regex1 = /^(\d{4})\-(\d{2})\-(\d{2})T(\d{2}):(\d{2}):(\d{2})/;
 
-    if (regex.test(time)) {
+    if (isoFormat.test(time)) {
+        return new Date(time);
+    } else if (regex.test(time)) {
         return new Date([time.slice(0, 22), ':', time.slice(22)].join(''));
     } else if (regex1.test(time)) {
         return new Date(time.replace('T', ' '));
