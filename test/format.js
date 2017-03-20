@@ -49,6 +49,12 @@ describe('format', () => {
         }, {
             params: ['2017-02-19T10:15:43+0000', 'd'], // 周日
             result: '日',
+        }, {
+            params: ['2016-08-09', 'YY年MM月DD日'],
+            result: '16年08月09日',
+        }, {
+            params: ['2016-08-09', 'YYYY年M月D日'],
+            result: '2016年8月9日',
         }];
         test('formatDate', dataArr);
     });
