@@ -51,13 +51,13 @@ bayUtils.isMobileUA(navigator.userAgent);
      * 获取某一格式的日期
      * @param {string} date 日期
      * @param {string} format 自定义格式，默认为 yyyy-MM-DD
-        比如： yyyy-MM-DD hh:mm:ss SSS 或者 yy年MM月DD日 hh时mm分ss秒 SSS毫秒
+        比如： yyyy-MM-DD hh:mm:ss SSS 或者 YY年MM月DD日 hh时mm分ss秒 SSS毫秒, 其中 y 大小写均可
      * @return {string} dateStr 格式为 format 的日期
      */
      > formatDate('2016-08-09 08:01:23');
      > 2016-08-09
 
-     > formatDate('2016-11-09 08:01:23', 'yyyy.M.d');
+     > formatDate('2016-11-09 08:01:23', 'YYYY.M.D');
      > 2016.11.9
 
      > formatDate(new Date('2016-08-09 08:01:23'), 'yy年MM月DD日');
