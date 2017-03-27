@@ -48,6 +48,7 @@ export const ajax = (options, isOriginal = false, configure) => {
         },
     };
 
+    options.type = options.type || 'GET';
     if (options.data && typeof options.data === 'object' && options.type !== 'GET') {
         options.data = JSON.stringify(options.data); // eslint-disable-line
     }
