@@ -1,7 +1,13 @@
 export const parseDate = (time) => {
+    // example: '2017-03-02T23:49:45+0800';
     const regex = /^(\d{4})\-(\d{2})\-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\+|\-)(\d{4})$/;
+    // example: '2017-03-02T23:49:45';
+    const regex1 = /^(\d{4})\-(\d{2})\-(\d{2})T(\d{2}):(\d{2}):(\d{2})$/;
+
     if (regex.test(time)) {
         return new Date([time.slice(0, 22), ':', time.slice(22)].join(''));
+    } else if (regex1.test(time)) {
+        return new Date(time.replace('T', ' '));
     }
     return new Date(time);
 };
@@ -13,6 +19,7 @@ export const formatDate = (date, format = 'yyyy-MM-DD') => {
     const weekdays = '日_一_二_三_四_五_六'.split('_');
     const newDate = parseDate(date);
     const dateMap = {
+        Y: newDate.getFullYear(),
         y: newDate.getFullYear(),
         M: newDate.getMonth() + 1,
         D: newDate.getDate(),
@@ -22,7 +29,7 @@ export const formatDate = (date, format = 'yyyy-MM-DD') => {
         s: newDate.getSeconds(),
         S: newDate.getMilliseconds(),
     };
-    const dateStr = format.replace(/([yMDdhmsS])+/g, (match, key) => {
+    const dateStr = format.replace(/([YyMDdhmsS])+/g, (match, key) => {
         let dateItem = dateMap[key];
         const matchLen = match.length;
 
@@ -42,7 +49,7 @@ export const formatDate = (date, format = 'yyyy-MM-DD') => {
         }
 
         // 只有 year 可以截取，其他都无法截取
-        if (key === 'y') {
+        if (key === 'y' || key === 'Y') {
             return dateItem.substr(dateItem.length - matchLen);
         }
 
