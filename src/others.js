@@ -87,17 +87,17 @@ export const getUrlsFromStr = (str) => {
     return str.match(urlPattern);
 };
 
-export const uniqArr = arr => [...new Set(arr)];
-// export const uniqArr = (arr) => {
-    // const newArr = [];
-    // arr.forEach((item, index) => {
-    //     const firstIndex = arr.indexOf(item);
-    //     if (firstIndex === index && arr[firstIndex] === item) {
-    //         newArr.push(item);
-    //     }
-    // });
-    // return newArr;
-// }
+// export const uniqArr = arr => [...new Set(arr)];
+export const uniqArr = (arr) => {
+    const newArr = [];
+    arr.forEach((item, index) => {
+        const firstIndex = arr.indexOf(item);
+        if (firstIndex === index && arr[firstIndex] === item) {
+            newArr.push(item);
+        }
+    });
+    return newArr;
+};
 
 /*
  * @params str {String}
