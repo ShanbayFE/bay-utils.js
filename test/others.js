@@ -47,6 +47,11 @@ describe('others', () => {
     });
 
     describe('getUrlsFromString', () => {
+        it('can\'t get urls', () => {
+            const string = 'content';
+            const urls = bayUtils.getUrlsFromStr(string);
+            assert.equal(urls, null);
+        });
         it('get urls from string', () => {
             const string = 'https://www.google.com/q/qwe/a i like google, I like stackoverflow too. https://stackoverflow.com/qwe?qwe=ee';
             const urls = bayUtils.getUrlsFromStr(string);
@@ -74,6 +79,16 @@ describe('others', () => {
     });
 
     describe('uniqArr', () => {
+        it('null convert to an empty array', () => {
+            const arr = null;
+            const newArr = bayUtils.uniqArr(arr);
+            assert.equal(newArr.length, 0);
+        });
+        it('other type convert to an array', () => {
+            const arr = '123';
+            const newArr = bayUtils.uniqArr(arr);
+            assert.equal(newArr.length, 0);
+        });
         it('collapse array of numbers', () => {
             const arr = [1, 1, 2, 3, 4, 4];
             const newArr = bayUtils.uniqArr(arr);
