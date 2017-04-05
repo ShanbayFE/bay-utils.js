@@ -84,6 +84,11 @@ describe('others', () => {
             const newArr = bayUtils.uniqArr(arr);
             assert.equal(newArr.length, 0);
         });
+        it('other type convert to an array', () => {
+            const arr = '123';
+            const newArr = bayUtils.uniqArr(arr);
+            assert.equal(newArr.length, 0);
+        });
         it('collapse array of numbers', () => {
             const arr = [1, 1, 2, 3, 4, 4];
             const newArr = bayUtils.uniqArr(arr);

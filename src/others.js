@@ -1,4 +1,5 @@
 import { formatDate } from './format';
+import { isArray } from './validator';
 
 export const getSearchValue = (searchName, url = window.location.href) => {
     const name = searchName.replace(/[[\]]/g, '\\$&');
@@ -88,10 +89,10 @@ export const getUrlsFromStr = (str) => {
 };
 
 // export const uniqArr = arr => [...new Set(arr)];
-export const uniqArr = (arr) => {
+export const uniqArr = (arr = []) => {
     const newArr = [];
 
-    if (!arr) {
+    if (!isArray(arr)) {
         return newArr;
     }
 
