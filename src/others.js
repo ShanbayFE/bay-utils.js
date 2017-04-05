@@ -90,6 +90,11 @@ export const getUrlsFromStr = (str) => {
 // export const uniqArr = arr => [...new Set(arr)];
 export const uniqArr = (arr) => {
     const newArr = [];
+
+    if (!arr) {
+        return newArr;
+    }
+
     arr.forEach((item, index) => {
         const firstIndex = arr.indexOf(item);
         if (firstIndex === index && arr[firstIndex] === item) {
@@ -106,6 +111,7 @@ export const uniqArr = (arr) => {
 export const transformUrlToAnchor = (str) => {
     let newStr = str;
     const urls = uniqArr(getUrlsFromStr(str));
+
     urls.forEach((url) => {
         const anchor = `<a href='${url}' target='_blank'>${url}</a>`;
         newStr = newStr.replace(new RegExp(`${url}`, 'gi'), anchor);
