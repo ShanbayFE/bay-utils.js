@@ -1,12 +1,12 @@
 {
   "name": "bay-utils",
-  "version": "1.1.17",
+  "version": "1.1.18",
   "description": "common functions for shanbay frontend projects",
   "main": "lib/index.js",
   "scripts": {
     "prepublish": "npm run compile",
     "test": "npm run compile && mocha -w --compilers js:babel-core/register",
-    "compile": "webpack --display-error-detail --progress && babel -d lib/ src/ --presets=latest",
+    "compile": "webpack --display-error-details --progress && babel -d lib/ src/ --presets=latest",
     "coverage": "babel-node node_modules/.bin/babel-istanbul cover _mocha -- --compilers js:babel-core/register"
   },
   "author": "ice",

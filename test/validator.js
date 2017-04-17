@@ -89,7 +89,8 @@ describe('validator', () => {
     const shanbayAgent = 'com.shanbay.words/7.5.900 (Android,4.4.4,MI 3W,Xiaomi; Frontend/1.1)';
     const wechatAgent = 'micromessenger/3.2.1(Android,4.4.4,MI 3W,Xiaomi; Frontend/1.1) Chrome/55.0.2883.95';
     const androidAgent = 'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) Chrome/55.0.2883.95 Mobile Safari/537.36';
-    const iOSAgent = 'Mozilla/5.0 (iPhone; CPU iPHone OS 9_1 like Mac OS X) Version/9.0 Mobile/13B143 Safari/601.1';
+    const iPhoneAgent = 'Mozilla/5.0 (iPhone; CPU iPHone OS 9_1 like Mac OS X) Version/9.0 Mobile/13B143 Safari/601.1';
+    const iOSAgent = 'bayAgent/1.1 iOS/10.3 com.shanbay.speak/1.9.9_rv:99 channel/0 Apple/Simulator Frontend/1.5 api/2.3';
 
     describe('isWechatUA', () => {
         test({
@@ -102,7 +103,7 @@ describe('validator', () => {
     describe('isMobileUA', () => {
         test({
             validator: 'isMobileUA',
-            valid: [shanbayAgent, mobileAgent, wechatAgent],
+            valid: [shanbayAgent, mobileAgent, wechatAgent, iOSAgent, iPhoneAgent],
             invalid: [pcAgent],
         });
     });
@@ -111,14 +112,14 @@ describe('validator', () => {
         test({
             validator: 'isAndroidUA',
             valid: [androidAgent],
-            invalid: [pcAgent, iOSAgent],
+            invalid: [pcAgent, iOSAgent, iPhoneAgent],
         });
     });
 
     describe('isIOSUA', () => {
         test({
             validator: 'isIOSUA',
-            valid: [iOSAgent],
+            valid: [iOSAgent, iPhoneAgent],
             invalid: [pcAgent, androidAgent],
         });
     });
