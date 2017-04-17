@@ -41,13 +41,13 @@ export const isWechatUA = (agent) =>
     /micromessenger/i.test(agent);
 
 export const isMobileUA = (agent) =>
-    /Mobile|iP(hone|od|ad)|Android|BlackBerry/i.test(agent);
+    /Mobile|iP(hone|od|ad)|iOS|Android|BlackBerry/i.test(agent);
 
 export const isAndroidUA = (agent) =>
     /(android)/i.test(agent);
 
 export const isIOSUA = (agent) =>
-    /iPad|iPhone|iPod/i.test(agent);
+    /iPad|iOS|iPhone|iPod/i.test(agent);
 
 export const isShanbayAppUA = (agent) =>
     /com\.shanbay/.test(agent.toLowerCase());
