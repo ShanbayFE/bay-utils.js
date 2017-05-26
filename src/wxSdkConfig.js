@@ -37,15 +37,17 @@ export const wxSdkConfig = (param) => {
         } = param;
     if (isWechatUA(window.navigator.userAgent)) {
         ajax({
-            url: `${isDev ? LOCAL_PREFIX_V1 : SHANBAY_PREFIX_V1}/wechat/jsconfig/?url=${window.location.href}`,
+            url: `${isDev ? LOCAL_PREFIX_V1 : SHANBAY_PREFIX_V1}/wechat/jsconfig/?url=${encodeURIComponent(window.location.href)}`,
             success: (data) => {
+                // wx.config() 函数会修改jsApiList参数
+                const jsApiListCopy = Object.assign({}, jsApiList);
                 const config = {
                     debug: isDebug,
                     appId: data.appid,
                     timestamp: data.timestamp,
                     nonceStr: data.noncestr,
                     signature: data.signature,
-                    jsApiList,
+                    jsApiList: jsApiListCopy,
                 };
                 wx.config(config);
                 wx.ready(() => {
