@@ -40,7 +40,7 @@ export const wxSdkConfig = (param) => {
             url: `${isDev ? LOCAL_PREFIX_V1 : SHANBAY_PREFIX_V1}/wechat/jsconfig/?url=${encodeURIComponent(window.location.href)}`,
             success: (data) => {
                 // wx.config() 函数会修改jsApiList参数
-                const jsApiListCopy = Object.assign({}, jsApiList);
+                const jsApiListCopy = jsApiList.concat();
                 const config = {
                     debug: isDebug,
                     appId: data.appid,
