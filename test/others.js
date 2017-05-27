@@ -33,7 +33,7 @@ describe('others', () => {
                 day2: '2017-2-12 00:00',
                 dayDiff: 2,
             }];
-            dataArr.forEach(data => {
+            dataArr.forEach((data) => {
                 assert.equal(bayUtils.getDayDiff(data.day1, data.day2), data.dayDiff);
             });
         });
@@ -108,6 +108,17 @@ describe('others', () => {
             const arr = [1, '1', { a: 1 }, '1'];
             const newArr = bayUtils.uniqArr(arr);
             assert.equal(newArr.length, 3);
+        });
+    });
+
+    describe('getAppNameFromAgent', () => {
+        it('get app name from agent', () => {
+            const agent = ' com.shanbay.words/7.5.900 (Android,4.4.4,MI 3W,Xiaomi; Frontend/1.1)';
+            const agent1 = 'this is hahaha com.shanbay.reader/7.5.900 (Android,4.4.4,MI 3W,Xiaomi; Frontend/1.1)';
+            const agent2 = ' com.shanbay.hahdah/7.5.900 (Android,4.4.4,MI 3W,Xiaomi; Frontend/1.1)';
+            assert.equal(bayUtils.getAppNameFromAgent(agent), 'bdc');
+            assert.equal(bayUtils.getAppNameFromAgent(agent1), 'read');
+            assert.equal(bayUtils.getAppNameFromAgent(agent2), undefined);
         });
     });
 });
