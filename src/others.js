@@ -119,3 +119,26 @@ export const transformUrlToAnchor = (str) => {
     });
     return newStr;
 };
+
+export const getAppNameFromAgent = (agent) => {
+    let name;
+
+    const appsData = {
+        'com.shanbay.words': 'bdc',
+        'com.shanbay.news': 'news',
+        'com.shanbay.listen': 'listen',
+        'com.shanbay.speak': 'speak',
+        'com.shanbay.reader': 'read',
+        'com.shanbay.book': 'read',
+        'com.shanbay.sentence': 'sentence',
+        'com.beeblio.sentence': 'sentence',
+    };
+
+    Object.keys(appsData).forEach((key) => {
+        if (agent.indexOf(key) !== -1) {
+            name = appsData[key];
+        }
+    });
+
+    return name;
+};

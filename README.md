@@ -381,3 +381,11 @@ bayUtils.isMobileUA(navigator.userAgent);
     *    isDebug: 是否开启调试模式, 默认为false
     */
     wxSdkConfig(params);
+
+### getAppNameFromAgent
+    /**
+    * 根据 agent 获取当前 app 的 name，name 与 xbay 的 appsData 相同
+    * @param {string} agent
+    */
+    > getAppNameFromAgent(window.navigator.userAgent);
+    > bdc 
