@@ -50,7 +50,7 @@ export const isIOSUA = (agent) =>
     /iPad|iOS|iPhone|iPod/i.test(agent);
 
 export const isShanbayAppUA = (agent) =>
-    /com\.shanbay/.test(agent.toLowerCase());
+    /com\.shanbay|com\.beeblio/.test(agent.toLowerCase());
 
 export const isMobilePhone = (data) => {
     const str = toString(data);
