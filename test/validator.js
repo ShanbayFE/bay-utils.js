@@ -91,6 +91,7 @@ describe('validator', () => {
     const androidAgent = 'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) Chrome/55.0.2883.95 Mobile Safari/537.36';
     const iPhoneAgent = 'Mozilla/5.0 (iPhone; CPU iPHone OS 9_1 like Mac OS X) Version/9.0 Mobile/13B143 Safari/601.1';
     const iOSAgent = 'bayAgent/1.1 iOS/10.3 com.shanbay.speak/1.9.9_rv:99 channel/0 Apple/Simulator Frontend/1.5 api/2.3';
+    const sentenceAgent = 'com.beeblio';
 
     describe('isWechatUA', () => {
         test({
@@ -127,7 +128,7 @@ describe('validator', () => {
     describe('isShanbayAppUA', () => {
         test({
             validator: 'isShanbayAppUA',
-            valid: [shanbayAgent],
+            valid: [shanbayAgent, sentenceAgent],
             invalid: [pcAgent, mobileAgent, wechatAgent],
         });
     });
