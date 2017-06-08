@@ -84,3 +84,30 @@ export const formatSafetyEmail = (email, start, end, symbol) => {
 
 export const formatSafetyMobilephone = (mobilephone, start = 3, end = 4, symbol) =>
     formatSafetyStr(mobilephone, start, end, symbol);
+
+// 只处理低于 100 的数字
+export const formatNumToCn = (str) => {
+    const num = +str;
+
+    const numCnArr = ['', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+
+    const unitNum = num % 10;
+    const tenNum = Math.floor(num / 10);
+
+    const unitCn = numCnArr[unitNum];
+    const tenCn = tenNum === 1 ? '' : numCnArr[tenNum];
+
+    if (num >= 100) {
+        return num;
+    }
+
+    if (num >= 10) {
+        return `${tenCn}十${unitCn}`;
+    }
+
+    if (num > 0) {
+        return unitCn;
+    }
+
+    return '零';
+};
