@@ -92,4 +92,16 @@ describe('format', () => {
             assert.equal(bayUtils.formatSafetyMobilephone('18111223344', 2), '18*****3344');
         });
     });
+
+    describe('formatNumToCn', () => {
+        it('should return chinese number', () => {
+            assert.equal(bayUtils.formatNumToCn(0), '零');
+            assert.equal(bayUtils.formatNumToCn(3), '三');
+            assert.equal(bayUtils.formatNumToCn(10), '十');
+            assert.equal(bayUtils.formatNumToCn(15), '十五');
+            assert.equal(bayUtils.formatNumToCn(40), '四十');
+            assert.equal(bayUtils.formatNumToCn(45), '四十五');
+            assert.equal(bayUtils.formatNumToCn(99), '九十九');
+        });
+    });
 });

@@ -117,6 +117,15 @@ bayUtils.isMobileUA(navigator.userAgent);
      > formatSafetyMobilephone('18111223344');
      > '181****3344'
 
+### formatNumToCn
+    /**
+     * 将数字转化为中文
+     * @param {number} number 数字
+     * @return {string} str 中文 
+     */
+     > formatNumToCn(21);
+     > '二十一'
+
 ## Validator
 
 ### assertString
@@ -388,4 +397,4 @@ bayUtils.isMobileUA(navigator.userAgent);
     * @param {string} agent
     */
     > getAppNameFromAgent(window.navigator.userAgent);
-    > bdc 
+    > bdc
