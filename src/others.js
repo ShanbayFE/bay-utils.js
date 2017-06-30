@@ -1,4 +1,3 @@
-/* global WeixinJSBridge */
 import { formatDate } from './format';
 import { isArray } from './validator';
 
@@ -143,4 +142,3 @@ export const getAppNameFromAgent = (agent) => {
 
     return name;
 };
-
