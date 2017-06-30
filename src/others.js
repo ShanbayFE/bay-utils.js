@@ -1,3 +1,4 @@
+/* global WeixinJSBridge */
 import { formatDate } from './format';
 import { isArray } from './validator';
 
@@ -141,4 +142,10 @@ export const getAppNameFromAgent = (agent) => {
     });
 
     return name;
+};
+
+export const hideWxShareMenu = () => {
+    document.addEventListener('WeixinJSBridgeReady', () => {
+        WeixinJSBridge.call('hideOptionMenu');
+    });
 };
