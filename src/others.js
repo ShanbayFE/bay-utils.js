@@ -144,8 +144,3 @@ export const getAppNameFromAgent = (agent) => {
     return name;
 };
 
-export const hideWxShareMenu = () => {
-    document.addEventListener('WeixinJSBridgeReady', () => {
-        WeixinJSBridge.call('hideOptionMenu');
-    });
-};
