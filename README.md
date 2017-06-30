@@ -121,7 +121,7 @@ bayUtils.isMobileUA(navigator.userAgent);
     /**
      * 将数字转化为中文
      * @param {number} number 数字
-     * @return {string} str 中文 
+     * @return {string} str 中文
      */
      > formatNumToCn(21);
      > '二十一'
@@ -388,6 +388,7 @@ bayUtils.isMobileUA(navigator.userAgent);
     *    onReady: 成功验证后的回调函数,
     *    isDev: 是否为开发环境, 默认为false,
     *    isDebug: 是否开启调试模式, 默认为false
+    *    isHideMenu: {Boolean} 是否隐藏右上角分享菜单, 默认为false
     */
     wxSdkConfig(params);
 
