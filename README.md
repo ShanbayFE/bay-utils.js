@@ -388,7 +388,6 @@ bayUtils.isMobileUA(navigator.userAgent);
     *    onReady: 成功验证后的回调函数,
     *    isDev: 是否为开发环境, 默认为false,
     *    isDebug: 是否开启调试模式, 默认为false
-    *    isHideMenu: {Boolean} 是否隐藏右上角分享菜单, 默认为false
     */
     wxSdkConfig(params);
 
