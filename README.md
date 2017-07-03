@@ -121,7 +121,7 @@ bayUtils.isMobileUA(navigator.userAgent);
     /**
      * 将数字转化为中文
      * @param {number} number 数字
-     * @return {string} str 中文 
+     * @return {string} str 中文
      */
      > formatNumToCn(21);
      > '二十一'
