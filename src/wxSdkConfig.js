@@ -1,4 +1,4 @@
-/* global wx, WeixinJSBridge */
+/* global wx */
 import {
     isWechatUA,
 } from './validator';
@@ -39,15 +39,7 @@ export const wxSdkConfig = (param) => {
         onReady,
         isDev = false,
         isDebug = false,
-        isHideMenu = false,
     } = param;
-
-    if (isHideMenu) {
-        document.addEventListener('WeixinJSBridgeReady', () => {
-            WeixinJSBridge.call('hideOptionMenu');
-        });
-        return;
-    }
 
     if (isWechatUA(window.navigator.userAgent)) {
         ajax({
@@ -65,7 +57,7 @@ export const wxSdkConfig = (param) => {
                 };
                 wx.config(config);
                 wx.ready(() => {
-                    defaultJsApiList.forEach((jsApi) => {
+                    jsApiListCopy.forEach((jsApi) => {
                         if (shareData && jsApiList.indexOf(jsApi) !== -1) {
                             wx[jsApi](shareData);
                         }
