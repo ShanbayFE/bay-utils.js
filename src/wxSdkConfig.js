@@ -30,7 +30,6 @@ const defaultJsApiList = [
  *     onReady: 成功验证后的回调函数,
  *     isDev: 是否为开发环境，默认为false,
  *     isDebug: 是否开启调试模式,
- *     isHideMenu: 是否隐藏分享菜单,
  */
 export const wxSdkConfig = (param) => {
     const {
