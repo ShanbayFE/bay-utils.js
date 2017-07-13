@@ -1,4 +1,5 @@
 import { ajax } from './others';
+import { merge } from './validator';
 
 export const studyroomShare = (param) => {
     const SHANBAY_PREFIX_V2 = 'https://www.shanbay.com/api/v2';
@@ -18,15 +19,12 @@ export const studyroomShare = (param) => {
         redirect_url: window.location.href,
     };
 
-    Object.assign(shareContent, data.share_content);
+    merge(data.share_content, shareContent);
 
     ajax({
         url: `${isDev ? LOCAL_PREFIX_V2 : SHANBAY_PREFIX_V2}/studyroom/posts/share/`,
         type: 'POST',
-        data: {
-            content: data.content,
-            share_content: shareContent,
-        },
+        data,
         success: onSuccess,
         error: onError,
     });
