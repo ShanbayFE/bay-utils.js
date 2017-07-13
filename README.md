@@ -121,7 +121,7 @@ bayUtils.isMobileUA(navigator.userAgent);
     /**
      * 将数字转化为中文
      * @param {number} number 数字
-     * @return {string} str 中文 
+     * @return {string} str 中文
      */
      > formatNumToCn(21);
      > '二十一'
@@ -390,6 +390,25 @@ bayUtils.isMobileUA(navigator.userAgent);
     *    isDebug: 是否开启调试模式, 默认为false
     */
     wxSdkConfig(params);
+
+### studyroomShare
+    /**
+    * 分享到自习室接口
+    * @params {Object} 参数
+    * 参数说明：
+    *    data: {Object}, 用以分享的信息，具体为下
+    *        content: 用户分享的内容
+    *        share_content: 分享需要的参数
+    *            title: 分享标题，默认为当前页面的title
+    *            content: 分享内容
+    *            image_url: 图片，默认为扇贝logo
+    *            redirect_url: 重定向地址，默认为当前页面
+    *    isDev: 是否为开发环境, 默认为false,
+    *    onSuccess: 发送成功后的回调函数,
+    *    onError: 发送失败后的回调函数,
+    */
+    studyroomShare(params);
+
 
 ### getAppNameFromAgent
     /**
