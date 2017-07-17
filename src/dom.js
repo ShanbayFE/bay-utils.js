@@ -181,7 +181,7 @@ export const parsePasteDataToMarkdown = (e, disabledList = [], type = 'google-do
         const hasColor = $node.css('color') !== 'rgb(0, 0, 0)' && !isColorDisabled;
 
         if (isBold && isItalic) {
-            content = `__${content}__`;
+            content = `**_${content}_**`;
         } else if (isBold) {
             content = `**${content}**`;
         } else if (isItalic) {
