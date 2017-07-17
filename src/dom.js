@@ -24,11 +24,11 @@ export const removeClass = (el, className) => {
     }
 };
 
-export const getFormData = formEl => {
+export const getFormData = (formEl) => {
     const data = {};
     const inputEls = formEl.querySelectorAll('input, textarea');
     const inputList = Array.prototype.slice.call(inputEls);
-    inputList.forEach(el => {
+    inputList.forEach((el) => {
         const name = el.getAttribute('name');
         const type = el.getAttribute('type');
         let value = el.value;
@@ -52,10 +52,10 @@ export const getFormData = formEl => {
     return data;
 };
 
-export const clearFormData = formEl => {
+export const clearFormData = (formEl) => {
     const inputEls = formEl.querySelectorAll('input, textarea');
     const inputList = Array.prototype.slice.call(inputEls);
-    inputList.forEach(el => {
+    inputList.forEach((el) => {
         el.value = null; // eslint-disable-line
     });
 };
@@ -102,7 +102,7 @@ export const lazyloadImage = (threshold = 100) => {
 
     const loadViewedImage = () => {
         const imageElsArray = Array.prototype.slice.call(imageEls);
-        imageElsArray.forEach(el => {
+        imageElsArray.forEach((el) => {
             requestAnimationFrame(() => {
                 const elTop = el.getBoundingClientRect().top;
                 const documentHeight = window.innerHeight;
@@ -131,7 +131,7 @@ const setButtonStatus = (targetEl, isValid) => {
 export const countDownBtn = (targetEl, options) => {
     const defaultOptions = {
         time: 60,
-        getProcessText: (countDownTime) => `${countDownTime}s后重发`,
+        getProcessText: countDownTime => `${countDownTime}s后重发`,
         endText: '重新获取验证码',
     };
     options = merge(options, defaultOptions);
@@ -151,4 +151,53 @@ export const countDownBtn = (targetEl, options) => {
         }
     }, 1000);
     return cdInterval;
+};
+
+// disabledList: color, bold, italic
+export const parsePasteDataToMarkdown = (e, disabledList = [], type = 'google-docs') => {
+    const html = e.clipboardData.getData('text/html');
+    const $dom = $(html);
+    const $result = $dom.filter((i, dom) => ['META'].indexOf(dom.tagName.toUpperCase()) === -1);
+
+    const traverseDom = ($root, handler) => {
+        if ($root.children().length) {
+            $root.children().each((i, dom) => traverseDom($(dom), handler));
+        } else {
+            handler($root);
+        }
+    };
+
+    const resultStrs = [];
+    traverseDom($result, ($node) => {
+        let content = $node.html();
+        const color = $node.css('color');
+
+        const isBoldDisabled = disabledList.indexOf('bold') > -1;
+        const isItalicDisabled = disabledList.indexOf('italic') > -1;
+        const isColorDisabled = disabledList.indexOf('color') > -1;
+
+        const isBold = $node.css('font-weight') > 400 && !isBoldDisabled;
+        const isItalic = $node.css('font-style') === 'italic' && !isItalicDisabled;
+        const hasColor = $node.css('color') !== 'rgb(0, 0, 0)' && !isColorDisabled;
+
+        if (isBold && isItalic) {
+            content = `__${content}__`;
+        } else if (isBold) {
+            content = `**${content}**`;
+        } else if (isItalic) {
+            content = `*${content}*`;
+        }
+
+        if (hasColor) {
+            content = `<span style="color:${color}">${content}</span>`;
+        }
+
+        if ($node[0].tagName.toUpperCase() === 'BR') {
+            resultStrs.push('\n\r');
+        } else {
+            resultStrs.push(content);
+        }
+    });
+
+    return resultStrs.join('');
 };

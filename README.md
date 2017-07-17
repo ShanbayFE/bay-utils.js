@@ -306,6 +306,16 @@ bayUtils.isMobileUA(navigator.userAgent);
      * @return {string} cdInterval 倒计时标记
     **/
 
+### parsePasteDataToMarkdown
+    /**
+     * 将 clipboard 中的内容转为 markdown
+     * @param {event} e 事件
+     * @param {array} disabledList 选项，具体如下：
+     *    color： 颜色, 转为 <span style="color: rgb(255, 0, 0)">text</span>
+     *    bold： 加粗, 转为 **text**
+     *    italic： 斜体, 转为 *text*（加粗且斜体时，__text__）
+     * @return {string} 解析后的 markdown
+    **/
 
 ## Others
 
