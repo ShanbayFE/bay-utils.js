@@ -69,6 +69,10 @@ export const getDayDiff = (day1, day2) => {
     return Math.floor((new Date(newDay2) - new Date(newDay1)) / (1000 * 60 * 60 * 24));
 };
 
+/*
+ * @params userAgent {String}
+ * @return version {String}
+ */
 export const getFrontendVersion = (userAgent = window.navigator.userAgent) => {
     const uaFrontEndKey = userAgent.match(/Frontend\/(\d+).(\d+)/gi);
 
@@ -76,7 +80,7 @@ export const getFrontendVersion = (userAgent = window.navigator.userAgent) => {
         return null;
     }
 
-    return parseFloat(uaFrontEndKey[0].replace(/Frontend\//gi, ''));
+    return uaFrontEndKey[0].replace(/Frontend\//gi, '');
 };
 
 /*

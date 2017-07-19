@@ -359,10 +359,10 @@ bayUtils.isMobileUA(navigator.userAgent);
     /**
     * 获取 Frontend 版本号
     * @params {object} ua userAgent，默认为 window.navigator.userAgent
-    * @return {number} version 版本号
+    * @return {string} version 版本号
     */
     > getFrontendVersion();
-    > 1.1
+    > "1.10"
 
 ### uniqArr
     /**
