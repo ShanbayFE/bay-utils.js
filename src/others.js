@@ -41,6 +41,22 @@ export const ajax = (options, isOriginal = false, configure) => {
             } else if (json.status_code === 0) {
                 options.success && options.success(json.data);
             } else {
+                if (json.status_code === 422) {
+                    json.msg = ((errors) => {
+                        if (!errors) {
+                            return json.msg;
+                        }
+
+                        let result = [];
+                        $.each(errors, function(field, errorArr) {
+                            const fieldErrors = errorArr.map(item => `(${field}): ${item}`);
+                            result = result.concat(fieldErrors);
+                        });
+
+                        return result.join('\n');
+                    })(json.errors);
+                }
+
                 options.error && options.error(json.status_code, json.msg || '请求失败，请稍后重试');
             }
         },
