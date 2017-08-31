@@ -1,3 +1,4 @@
+/* global wx */
 import { isWechatUA } from './validator';
 import { ajax } from './others';
 
@@ -53,7 +54,12 @@ export const wxSdkConfig = (param) => {
                 wx.ready(() => {
                     ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareQZone'].forEach((jsApi) => {
                         if (shareData && jsApiList.indexOf(jsApi) !== -1) {
-                            wx[jsApi](shareData);
+                            const newShareData = $.extend({}, shareData, {
+                                success() {
+                                    shareData.success && shareData.success(jsApi);
+                                }
+                            })
+                            wx[jsApi](newShareData);
                         }
                     });
                     onReady && onReady({
