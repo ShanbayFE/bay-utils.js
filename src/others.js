@@ -37,7 +37,7 @@ export const ajax = (options, isOriginal = false, configure) => {
     const primaryOptions = {
         success: (json) => {
             if (json.status_code === 401 || json.status_code === 403) {
-                window.location.href = `${config.LOGIN_URL}/?next=${location.pathname}${location.search}`;
+                window.location.href = `${config.LOGIN_URL}/?next=${encodeURIComponent(location.href)}`;
             } else if (json.status_code === 0) {
                 options.success && options.success(json.data);
             } else {
