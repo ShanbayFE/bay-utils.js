@@ -59,12 +59,16 @@ describe('validator', () => {
                 year: 2017,
             };
             const c = {
-                x: 2,
+                x: 4,
                 y: 'miao',
                 month: 12,
                 year: 2017,
             };
             assert.deepEqual(bayUtils.merge(a, b), c);
+            assert.deepEqual(bayUtils.merge(a, b, c), c);
+            assert.deepEqual(bayUtils.merge({}, a), a);
+            assert.deepEqual(bayUtils.merge({}, {}, a), a);
+            assert.deepEqual(bayUtils.merge({}, a, b), c);
         });
     });
 

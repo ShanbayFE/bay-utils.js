@@ -20,13 +20,19 @@ export const toString = (input) => {
     return String(input);
 };
 
-export const merge = (obj = {}, defaults) => {
-    Object.keys(defaults).forEach(key => {
-        if (typeof obj[key] === 'undefined') {
-            obj[key] = defaults[key];
+export const merge = (target = {}, ...sources) => {
+    const sourcesArr = [...sources];
+    const sourcesLen = sourcesArr.length;
+
+    for (let i = 0; i < sourcesLen; i += 1) {
+        for (const key in sourcesArr[i]) {
+            if (Object.prototype.hasOwnProperty.call(sourcesArr[i], key)) {
+                target[key] = sourcesArr[i][key];
+            }
         }
-    });
-    return obj;
+    }
+
+    return target;
 };
 
 export const isStandardBrowserEnv = () =>
