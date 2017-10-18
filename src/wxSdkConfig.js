@@ -30,15 +30,19 @@ const defaultJsApiList = [
 */
 
 export const wxSdkConfig = (param) => {
-    const { shareData,
-            jsApiList = defaultJsApiList,
-            onReady,
-            isDev = false,
-            isDebug = false,
-        } = param;
+    const {
+        shareData,
+        jsApiList = defaultJsApiList,
+        onReady,
+        onError,
+        isDev = false,
+        isDebug = false,
+    } = param;
     if (isWechatUA(window.navigator.userAgent)) {
         ajax({
-            url: `${isDev ? LOCAL_PREFIX_V1 : SHANBAY_PREFIX_V1}/wechat/jsconfig/?url=${encodeURIComponent(window.location.href)}`,
+            url: `${isDev
+                ? LOCAL_PREFIX_V1
+                : SHANBAY_PREFIX_V1}/wechat/jsconfig/?url=${encodeURIComponent(window.location.href)}`,
             success: (data) => {
                 // wx.config() 函数会修改jsApiList参数
                 const jsApiListCopy = jsApiList.concat();
@@ -52,22 +56,31 @@ export const wxSdkConfig = (param) => {
                 };
                 wx.config(config);
                 wx.ready(() => {
-                    ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareQZone'].forEach((jsApi) => {
+                    [
+                        'onMenuShareTimeline',
+                        'onMenuShareAppMessage',
+                        'onMenuShareQQ',
+                        'onMenuShareQZone',
+                    ].forEach((jsApi) => {
                         if (shareData && jsApiList.indexOf(jsApi) !== -1) {
                             const newShareData = $.extend({}, shareData, {
                                 success() {
                                     shareData.success && shareData.success(jsApi);
-                                }
-                            })
+                                },
+                            });
                             wx[jsApi](newShareData);
                         }
                     });
-                    onReady && onReady({
-                        appId: data.appid,
-                        timestamp: data.timestamp,
-                        nonceStr: data.noncestr,
-                        signature: data.signature,
-                    });
+                    onReady &&
+                        onReady({
+                            appId: data.appid,
+                            timestamp: data.timestamp,
+                            nonceStr: data.noncestr,
+                            signature: data.signature,
+                        });
+                });
+                wx.error((err) => {
+                    onError && onError(err);
                 });
             },
         });
