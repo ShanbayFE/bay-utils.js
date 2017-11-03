@@ -71,10 +71,34 @@ describe('format', () => {
     });
 
     describe('formatSafetyStr', () => {
-        it('should return replaced string by symbol', () => {
-            assert.equal(bayUtils.formatSafetyStr('123454321', 1, 3), '1*****321');
-            assert.equal(bayUtils.formatSafetyStr('123454321', 2, 3, '-'), '12----321');
-            assert.equal(bayUtils.formatSafetyStr('123454321', 7, 6, '-'), '123454321');
+        describe('should return replaced string by symbol', () => {
+            it('should return 1*****321', () => {
+                assert.deepEqual(bayUtils.formatSafetyStr('123454321', 1, 3), '1*****321');
+            });
+            it('should return 12----321', () => {
+                assert.deepEqual(bayUtils.formatSafetyStr('123454321', 2, 3, '-'), '12----321');
+            });
+            it('should return 123454321', () => {
+                assert.deepEqual(bayUtils.formatSafetyStr('123454321', 7, 6, '-'), '123454321');
+            });
+            it('should return 1--1', () => {
+                assert.deepEqual(bayUtils.formatSafetyStr('123454321', 1, 1, '-', 2), '1--1');
+            });
+            it('should return 1-------1 because symbolLen is 0', () => {
+                assert.deepEqual(bayUtils.formatSafetyStr('123454321', 1, 1, '-', 0), '1-------1');
+            });
+            it('should return 1-------1 because symbolLen is larger than string lenght', () => {
+                assert.deepEqual(bayUtils.formatSafetyStr('123454321', 1, 1, '-', 12), '1-------1');
+            });
+            it('should return 1-------1 because symbolLen is undefined', () => {
+                assert.deepEqual(bayUtils.formatSafetyStr('123454321', 1, 1, '-', undefined), '1-------1');
+            });
+            it('should return 1-------1 because symbolLen is null', () => {
+                assert.deepEqual(bayUtils.formatSafetyStr('123454321', 1, 1, '-', null), '1-------1');
+            });
+            it('should return 1-------1 because symbolLen is not number', () => {
+                assert.deepEqual(bayUtils.formatSafetyStr('123454321', 1, 1, '-', 'e'), '1-------1');
+            });
         });
     });
 
