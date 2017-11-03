@@ -88,10 +88,11 @@ bayUtils.isMobileUA(navigator.userAgent);
      * @param {number} start 截取字符串符号的开始位置，从字符串开始计算，以 1 开始
      * @param {number} end 截取字符串符号的结束位置，从字符串结尾计算，以 1 开始
      * @param {string} symbol 截取字符串符号，默认为 *
+     * @param {number} symbolLen 截取字符串符号的长度，默认是字符串长度减去开始和结尾部分的字符串长度和；如果传入数字参数，那么截取字符串符号的长度就是传入的参数
      * @return {string} str 一部分为明文的字符串，比如：1****com
      */
-     > formatSafetyStr('12345com', 1, 3);
-     > '1****com'
+     > formatSafetyStr('12345com', 1, 3, '+', 5);
+     > '1+++++com'
 
 ### formatSafetyEmail
     /**
@@ -100,6 +101,7 @@ bayUtils.isMobileUA(navigator.userAgent);
      * @param {number} start 同 formatSafetyStr，默认值为邮箱地址长度的 1/4
      * @param {number} end 同 formatSafetyStr，默认值为邮箱地址长度的 1/4
      * @param {string} symbol 截取字符串符号，默认为 *
+     * @param {number} symbolLen 截取字符串符号的长度，同 formatSafetyStr
      * @return {string} str 一部分为明文的邮箱地址，比如：1****com
      */
      > formatSafetyEmail('1234567@qq.com')
