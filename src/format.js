@@ -65,21 +65,30 @@ export const trimString = (text, limit, symbol = '...') => {
     return text.slice(0, limit) + symbol;
 };
 
-export const formatSafetyStr = (str, start, end, symbol = '*') => {
+export const formatSafetyStr = (str, start, end, symbol = '*', symbolLen) => {
     str = str.toString();
-    const symbolLen = str.length - start - end;
-    if (symbolLen < 0) {
+    const strLen = str.length;
+
+    // eslint-disable-next-line no-underscore-dangle
+    let _symbolLen = strLen - start - end;
+
+    if (typeof symbolLen === 'number' && symbolLen < _symbolLen && symbolLen > 0) {
+        _symbolLen = symbolLen;
+    }
+
+    if (_symbolLen < 0) {
         return str;
     }
-    const symbolStr = new Array(symbolLen + 1).join(symbol);
+
+    const symbolStr = new Array(_symbolLen + 1).join(symbol);
     return [str.slice(0, start), symbolStr, end <= 0 ? '' : str.slice(-end)].join('');
 };
 
-export const formatSafetyEmail = (email, start, end, symbol) => {
+export const formatSafetyEmail = (email, start, end, symbol, symbolLen) => {
     const str = email.toString();
     start = Number(start) || Math.floor(str.length * 1 / 4);
     end = Number(end) || Math.floor(str.length * 1 / 4);
-    return formatSafetyStr(str, start, end, symbol);
+    return formatSafetyStr(str, start, end, symbol, symbolLen);
 };
 
 export const formatSafetyMobilephone = (mobilephone, start = 3, end = 4, symbol) =>
