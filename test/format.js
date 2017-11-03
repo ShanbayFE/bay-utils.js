@@ -84,11 +84,17 @@ describe('format', () => {
             it('should return 1--1', () => {
                 assert.deepEqual(bayUtils.formatSafetyStr('123454321', 1, 1, '-', 2), '1--1');
             });
+            it('should return 1--1 because symbolLen is 1', () => {
+                assert.deepEqual(bayUtils.formatSafetyStr('121', 1, 0, '-', 3), '1---');
+            });
+            it('should return 1--1 because symbolLen is 2', () => {
+                assert.deepEqual(bayUtils.formatSafetyStr('11', 1, 1, '-', 2), '1--1');
+            });
             it('should return 1-------1 because symbolLen is 0', () => {
                 assert.deepEqual(bayUtils.formatSafetyStr('123454321', 1, 1, '-', 0), '1-------1');
             });
-            it('should return 1-------1 because symbolLen is larger than string lenght', () => {
-                assert.deepEqual(bayUtils.formatSafetyStr('123454321', 1, 1, '-', 12), '1-------1');
+            it('should return 1------------1 because symbolLen is larger than string lenght', () => {
+                assert.deepEqual(bayUtils.formatSafetyStr('123454321', 1, 1, '-', 12), '1------------1');
             });
             it('should return 1-------1 because symbolLen is undefined', () => {
                 assert.deepEqual(bayUtils.formatSafetyStr('123454321', 1, 1, '-', undefined), '1-------1');

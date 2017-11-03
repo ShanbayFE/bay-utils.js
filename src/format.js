@@ -72,7 +72,7 @@ export const formatSafetyStr = (str, start, end, symbol = '*', symbolLen) => {
     // eslint-disable-next-line no-underscore-dangle
     let _symbolLen = strLen - start - end;
 
-    if (typeof symbolLen === 'number' && symbolLen < _symbolLen && symbolLen > 0) {
+    if (typeof symbolLen === 'number' && symbolLen > 0) {
         _symbolLen = symbolLen;
     }
 
