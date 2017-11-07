@@ -1,7 +1,7 @@
 import { formatDate } from './format';
 import { isArray } from './validator';
 
-const SHANBAY_HOST = 'https://www.shanbay.com';
+const SHANBAY_HOST_REG = /^https:\/\/(www|rest)\.shanbay\.com/;
 
 export const getSearchValue = (searchName, url = window.location.href) => {
     const name = searchName.replace(/[[\]]/g, '\\$&');
@@ -69,9 +69,7 @@ export const ajax = (options, isOriginal = false, configure) => {
 
     options.type = options.type || 'GET';
 
-    if (window.location.href.indexOf(SHANBAY_HOST) === 0) {
-        options.url = options.url.replace(SHANBAY_HOST, '');
-    }
+    options.url = options.url.replace(SHANBAY_HOST_REG, '');
 
     if (options.data && typeof options.data === 'object' && options.type !== 'GET') {
         options.data = JSON.stringify(options.data); // eslint-disable-line
