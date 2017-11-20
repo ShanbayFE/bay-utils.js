@@ -33,15 +33,15 @@ const setWXConfig = (param, url) => {
     } = param;
 
     const { codename } = shareData;
+    const vaildShareLink = (link, host) => link.replace(/:\/\/(.*?)\//, `://${host}/`);
 
     ajax({
         url: `${isDev
             ? LOCAL_PREFIX_V1
             : SHANBAY_PREFIX_V1}/wechat/jsconfig/?url=${encodeURIComponent(window.location.href)}${codename ? `&codename=${codename}` : ''}`,
-        success: data => {
-            if (url) {
-                shareData.link = url.replace(/:\/\/(.*?)\//, `://${data.host}/`);
-            }
+        success: (data) => {
+            shareData.link = vaildShareLink(url || shareData.link, data.host);
+
             // wx.config() 函数会修改jsApiList参数
             const jsApiListCopy = jsApiList.concat();
             const config = {
@@ -59,7 +59,7 @@ const setWXConfig = (param, url) => {
                     'onMenuShareAppMessage',
                     'onMenuShareQQ',
                     'onMenuShareQZone',
-                ].forEach(jsApi => {
+                ].forEach((jsApi) => {
                     if (shareData && jsApiList.indexOf(jsApi) !== -1) {
                         const newShareData = $.extend({}, shareData, {
                             success() {
@@ -77,7 +77,7 @@ const setWXConfig = (param, url) => {
                         signature: data.signature,
                     });
             });
-            wx.error(err => {
+            wx.error((err) => {
                 onError && onError(err);
             });
         },
@@ -97,7 +97,7 @@ const setWXConfig = (param, url) => {
  *  isDebug: 是否开启调试模式
  */
 
-export const wxSdkConfig = param => {
+export const wxSdkConfig = (param) => {
     const { onReady, trackObject = null, isDev } = param;
     if (isWechatUA(window.navigator.userAgent)) {
         if (trackObject) {
@@ -105,7 +105,7 @@ export const wxSdkConfig = param => {
                 url: `${isDev ? LOCAL_PREFIX_V2 : SHANBAY_PREFIX_V2}/track/short_urls/`,
                 type: 'POST',
                 data: trackObject,
-                success: data => {
+                success: (data) => {
                     const { wechat } = data;
                     setWXConfig(param, wechat);
                 },
