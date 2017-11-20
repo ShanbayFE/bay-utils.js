@@ -33,14 +33,14 @@ const setWXConfig = (param, url) => {
     } = param;
 
     const { codename } = shareData;
-    const vaildShareLink = (link, host) => link.replace(/:\/\/(.*?)\//, `://${host}/`);
+    const replaceLinkHost = (link, host) => link.replace(/:\/\/(.*?)\//, `://${host}/`);
 
     ajax({
         url: `${isDev
             ? LOCAL_PREFIX_V1
             : SHANBAY_PREFIX_V1}/wechat/jsconfig/?url=${encodeURIComponent(window.location.href)}${codename ? `&codename=${codename}` : ''}`,
         success: (data) => {
-            shareData.link = vaildShareLink(url || shareData.link, data.host);
+            shareData.link = replaceLinkHost(url || shareData.link, data.host);
 
             // wx.config() 函数会修改jsApiList参数
             const jsApiListCopy = jsApiList.concat();
