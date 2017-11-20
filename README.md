@@ -393,13 +393,15 @@ bayUtils.isMobileUA(navigator.userAgent);
 ### wxSdkConfig
     /**
     * 微信JSSDK分享接口
-    * @params {Object} 参数
+    *
+    * @param {object} param 参数
     * 参数说明：
-    *    shareData: {Object}, 用以分享的信息，{title, link, imgUrl, success, cancel}
-    *    jsApiList: {Array}, 需要使用的JS接口列表,默认4种：分享到朋友圈, qq, qq空间, 分享给朋友
-    *    onReady: 成功验证后的回调函数,
-    *    isDev: 是否为开发环境, 默认为false,
-    *    isDebug: 是否开启调试模式, 默认为false
+    *  shareData: Object, 用以分享的信息，{title, link, imgUrl, success, cancel, codename},
+    *  trackObject: Object, track链接,
+    *  jsApiList: Array, 需要使用的JS接口列表,
+    *  onReady: 成功验证后的回调函数,
+    *  isDev: 是否为开发环境，默认为false,
+    *  isDebug: 是否开启调试模式
     */
     wxSdkConfig(params);
 
