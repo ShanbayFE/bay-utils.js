@@ -22,15 +22,6 @@ const defaultJsApiList = [
     'onMenuShareQZone',
 ];
 
-/*
-参数说明：
-    shareData: Object, 用以分享的信息，{title, link, imgUrl, success, cancel}
-    jsApiList: Array, 需要使用的JS接口列表,
-    onReady: 成功验证后的回调函数,
-    isDev: 是否为开发环境，默认为false,
-    isDebug: 是否开启调试模式
-*/
-
 const setWXConfig = (param, url) => {
     const {
         shareData,
@@ -92,6 +83,19 @@ const setWXConfig = (param, url) => {
         },
     });
 };
+
+/**
+ * wxSdkConfig
+ *
+ * @param {object} param 参数
+ * 参数说明：
+ *  shareData: Object, 用以分享的信息，{title, link, imgUrl, success, cancel, codename},
+ *  trackObject: Object, track链接,
+ *  jsApiList: Array, 需要使用的JS接口列表,
+ *  onReady: 成功验证后的回调函数,
+ *  isDev: 是否为开发环境，默认为false,
+ *  isDebug: 是否开启调试模式
+ */
 
 export const wxSdkConfig = param => {
     const { onReady, trackObject = null, isDev } = param;
