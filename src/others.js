@@ -21,6 +21,13 @@ export const getCookie = (cookie, name) => {
 
 export const ajax = (options, isOriginal = false, configure) => {
     $.support.cors = true;
+
+    options.type = options.type || options.method || 'GET';
+
+    options.url = options.url.replace(SHANBAY_HOST_REG, '');
+
+    const isVersionThreeAPI = /\/api\/v3\//.test(options.url);
+
     const config = $.extend({}, {
         LOGIN_URL: '/web/account/login',
     }, configure);
@@ -33,15 +40,27 @@ export const ajax = (options, isOriginal = false, configure) => {
         },
         headers: {
             'X-CSRFToken': getCookie(document.cookie, 'csrftoken'),
+            Accept: 'application/json',
         },
+    };
+
+    const checkAuth = (status) => {
+        if (status === 401 || status === 403) {
+            window.location.href = `${config.LOGIN_URL}/?next=${encodeURIComponent(location.href)}`;
+            return;
+        }
     };
 
     const primaryOptions = {
         success: (json) => {
-            if (json.status_code === 401 || json.status_code === 403) {
-                window.location.href = `${config.LOGIN_URL}/?next=${encodeURIComponent(location.href)}`;
-            } else if (json.status_code === 0) {
+            if (isVersionThreeAPI) {
                 options.success && options.success(json.data);
+                return;
+            }
+            checkAuth(json.status_code);
+            if (json.status_code === 0) {
+                options.success && options.success(json.data);
+                return;
             } else {
                 if (json.status_code === 422) {
                     json.msg = ((errors) => {
@@ -63,13 +82,11 @@ export const ajax = (options, isOriginal = false, configure) => {
             }
         },
         error: (xhr, textStatus) => {
+            checkAuth(xhr.status);
             options.error && options.error(xhr.status, `${textStatus}(${xhr.status})`);
         },
     };
 
-    options.type = options.type || 'GET';
-
-    options.url = options.url.replace(SHANBAY_HOST_REG, '');
 
     if (options.data && typeof options.data === 'object' && options.type !== 'GET') {
         options.data = JSON.stringify(options.data); // eslint-disable-line
