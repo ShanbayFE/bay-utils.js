@@ -24,6 +24,10 @@ export const ajax = (options, isOriginal = false, configure) => {
 
     options.type = options.type || options.method || 'GET';
 
+    if (options.method) {
+        console.warn('Ajax does\'t support \'method\' parameter! Please replace it by \'type\'!');
+    }
+
     options.url = options.url.replace(SHANBAY_HOST_REG, '');
 
     const isVersionThreeAPI = /\/api\/v3\//.test(options.url);
