@@ -46,8 +46,7 @@ export const ajax = (options, isOriginal = false, configure) => {
 
     const checkAuth = (status) => {
         if (status === 401 || status === 403) {
-            window.location.href = `${config.LOGIN_URL}/?next=${encodeURIComponent(location.href)}`;
-            return;
+            window.location.href = `${config.LOGIN_URL}/?next=${encodeURIComponent(window.location.href)}`;
         }
     };
 
@@ -60,7 +59,6 @@ export const ajax = (options, isOriginal = false, configure) => {
             checkAuth(json.status_code);
             if (json.status_code === 0) {
                 options.success && options.success(json.data);
-                return;
             } else {
                 if (json.status_code === 422) {
                     json.msg = ((errors) => {
@@ -69,7 +67,7 @@ export const ajax = (options, isOriginal = false, configure) => {
                         }
 
                         let result = [];
-                        $.each(errors, function(field, errorArr) {
+                        $.each(errors, (field, errorArr) => {
                             const fieldErrors = errorArr.map(item => `(${field}): ${item}`);
                             result = result.concat(fieldErrors);
                         });
