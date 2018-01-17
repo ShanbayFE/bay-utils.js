@@ -2,10 +2,7 @@
 import { isWechatUA } from './validator';
 import { ajax } from './others';
 
-const SHANBAY_PREFIX_V1 = 'https://www.shanbay.com/api/v1';
-const LOCAL_PREFIX_V1 = 'http://local.daydayup.me:3000/api/v1';
-const SHANBAY_PREFIX_V2 = 'https://www.shanbay.com/api/v2';
-const LOCAL_PREFIX_V2 = 'http://local.daydayup.me:3000/api/v2';
+const SHANBAY_HOST = 'https://www.shanbay.com';
 
 /*
 默认的JS接口列表：
@@ -28,7 +25,7 @@ const setWXConfig = (param, url) => {
         jsApiList = defaultJsApiList,
         onReady,
         onError,
-        isDev = false,
+        hostUrl = SHANBAY_HOST,
         isDebug = false,
     } = param;
 
@@ -36,9 +33,9 @@ const setWXConfig = (param, url) => {
     const replaceLinkHost = (link, host) => link.replace(/:\/\/(.*?)\//, `://${host}/`);
 
     ajax({
-        url: `${isDev
-            ? LOCAL_PREFIX_V1
-            : SHANBAY_PREFIX_V1}/wechat/jsconfig/?url=${encodeURIComponent(window.location.href)}${codename ? `&codename=${codename}` : ''}`,
+        url: `${hostUrl}/api/v1/wechat/jsconfig/?url=${encodeURIComponent(window.location.href)}${
+            codename ? `&codename=${codename}` : ''
+        }`,
         success: (data) => {
             shareData.link = replaceLinkHost(url || shareData.link, data.host);
 
@@ -93,16 +90,16 @@ const setWXConfig = (param, url) => {
  *  trackObject: Object, track链接,
  *  jsApiList: Array, 需要使用的JS接口列表,
  *  onReady: 成功验证后的回调函数,
- *  isDev: 是否为开发环境，默认为false,
+ *  hostUrl: 默认值为 https://www.shanbay.com
  *  isDebug: 是否开启调试模式
  */
 
 export const wxSdkConfig = (param) => {
-    const { onReady, trackObject = null, isDev } = param;
+    const { onReady, trackObject = null, hostUrl = SHANBAY_HOST } = param;
     if (isWechatUA(window.navigator.userAgent)) {
         if (trackObject) {
             ajax({
-                url: `${isDev ? LOCAL_PREFIX_V2 : SHANBAY_PREFIX_V2}/track/short_urls/`,
+                url: `${hostUrl}/api/v2/track/short_urls/`,
                 type: 'POST',
                 data: trackObject,
                 success: (data) => {

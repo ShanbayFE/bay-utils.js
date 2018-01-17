@@ -30,7 +30,7 @@ export const ajax = (options, isOriginal = false, configure) => {
 
     options.url = options.url.replace(SHANBAY_HOST_REG, '');
 
-    const isVersionThreeAPI = /\/api\/v3\//.test(options.url);
+    const isVersionThreeAPI = /\/api\/v3\/|apiv3/.test(options.url);
 
     const config = $.extend({}, {
         LOGIN_URL: '/web/account/login',
