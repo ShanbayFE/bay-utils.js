@@ -57,7 +57,7 @@ export const ajax = (options, isOriginal = false, configure) => {
     const primaryOptions = {
         success: (json) => {
             if (isVersionThreeAPI) {
-                options.success && options.success(json.data);
+                options.success && options.success(json);
                 return;
             }
             checkAuth(json.status_code);
