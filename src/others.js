@@ -49,7 +49,7 @@ export const ajax = (options, isOriginal = false, configure) => {
     };
 
     const checkAuth = (status) => {
-        if (status === 401 || status === 403) {
+        if (status === 401) {
             window.location.href = `${config.LOGIN_URL}/?next=${encodeURIComponent(window.location.href)}`;
         }
     };
