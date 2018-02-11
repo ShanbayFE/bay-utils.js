@@ -28,7 +28,11 @@ export const ajax = (options, isOriginal = false, configure) => {
         console.warn('Ajax does\'t support \'method\' parameter! Please replace it by \'type\'!');
     }
 
-    options.url = options.url.replace(SHANBAY_HOST_REG, '');
+    // 非admin地址，api v1,v2接口相对与当前根路径
+    if (!/admin/.test(window.location.host)) {
+        options.url = options.url.replace(SHANBAY_HOST_REG, '');
+    }
+
 
     const isVersionThreeAPI = /\/api\/v3\/|apiv3/.test(options.url);
 
