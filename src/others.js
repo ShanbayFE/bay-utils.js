@@ -12,11 +12,12 @@ export const getSearchValue = (searchName, url = window.location.href) => {
     return decodeURIComponent(results[2].replace(/\+/g, ''));
 };
 
-export const getCookie = (cookie, name) => {
-    const regStr = `; ${name}=(\\w+)`;
-    const reg = new RegExp(regStr, 'g');
-    const matched = reg.exec(`; ${cookie}`);
-    return matched && matched[1];
+export const getCookie = (cookie, cname) => {
+    const name = `${cname}=`;
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const ca = decodedCookie.split(';');
+    const result = ca.find(el => el.indexOf(name) > -1);
+    return result.substring((name.length + result.indexOf(name)), result.length) || '';
 };
 
 export const ajax = (options, isOriginal = false, configure) => {
