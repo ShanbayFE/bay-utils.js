@@ -17,7 +17,7 @@ export const getCookie = (cookie, cname) => {
     const decodedCookie = decodeURIComponent(document.cookie);
     const ca = decodedCookie.split(';');
     const result = ca.find(el => el.indexOf(name) > -1);
-    return result.substring((name.length + result.indexOf(name)), result.length) || '';
+    return result && result.substring((name.length + result.indexOf(name)));
 };
 
 export const ajax = (options, isOriginal = false, configure) => {
