@@ -1,6 +1,6 @@
 {
   "name": "bay-utils",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "common functions for shanbay frontend projects",
   "main": "lib/index.js",
   "scripts": {
