@@ -55,7 +55,7 @@ export const isShanbayAppUA = (agent) =>
 export const isMobilePhone = (data) => {
     const str = toString(data);
     const phones = {
-        'zh-CN': /^(\+?0?86\-?)?1[345789]\d{9}$/,
+        'zh-CN': /^(\+?0?86\-?)?1[3456789]\d{9}$/,
         'zh-TW': /^(\+?886\-?|0)?9\d{8}$/,
     };
 
