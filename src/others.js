@@ -16,7 +16,7 @@ export const getCookie = (cookie, cname) => {
     const name = `${cname}=`;
     const decodedCookie = decodeURIComponent(document.cookie);
     const ca = decodedCookie.split(';');
-    const result = ca.find(el => el.indexOf(name) > -1);
+    const result = ca.filter(el => el.indexOf(name) > -1)[0];
     return result && result.substring((name.length + result.indexOf(name)));
 };
 
