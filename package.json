@@ -21,5 +21,8 @@
     "clean-webpack-plugin": "^0.1.14",
     "mocha": "^3.2.0",
     "webpack": "^1.14.0"
+  },
+  "dependencies": {
+    "js-base64": "^2.1.9"
   }
 }
