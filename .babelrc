@@ -1,3 +1,10 @@
 {
-  "presets": ["latest"],
+    "presets": [
+        ["env", {
+            "targets": {
+                "browsers": ["ie >= 9", "Android >= 4", "iOS >= 8", "last 3 versions"]
+            },
+            "useBuiltins": true
+        }]
+    ]
 }

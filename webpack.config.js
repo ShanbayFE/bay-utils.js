@@ -7,8 +7,8 @@ const buildPath = path.join(__dirname, 'dist/');
 
 const commonConfig = {
     entry: {
-        'bay-utils': './src/index',
-        'bay-utils.min': './src/index',
+        'bay-utils': ["babel-polyfill", './src/index'],
+        'bay-utils.min': ["babel-polyfill", './src/index'],
     },
     output: {
         path: buildPath,
