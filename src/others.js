@@ -42,7 +42,6 @@ export const ajax = (options, isOriginal = false, configure) => {
     }, configure);
 
     const defaultOptions = {
-        contentType: 'application/json',
         crossDomain: true,
         xhrFields: {
             withCredentials: true,
@@ -52,6 +51,10 @@ export const ajax = (options, isOriginal = false, configure) => {
             Accept: 'application/json',
         },
     };
+
+    if (options.type !== 'GET') {
+        defaultOptions.contentType = 'application/json';
+    }
 
     const checkAuth = (status) => {
         if (status === 401) {
