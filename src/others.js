@@ -47,13 +47,13 @@ export const ajax = (options, isOriginal = false, configure) => {
             withCredentials: true,
         },
         headers: {
-            'X-CSRFToken': getCookie(document.cookie, 'csrftoken'),
             Accept: 'application/json',
         },
     };
 
     if (options.type !== 'GET') {
         defaultOptions.contentType = 'application/json';
+        defaultOptions.headers['X-CSRFToken'] = getCookie(document.cookie, 'csrftoken');
     }
 
     const checkAuth = (status) => {
