@@ -1,8 +1,6 @@
 import { formatDate } from './format';
 import { isArray } from './validator';
 
-const SHANBAY_HOST_REG = /^https:\/\/(www|rest)\.shanbay\.com/;
-
 export const getSearchValue = (searchName, url = window.location.href) => {
     const name = searchName.replace(/[[\]]/g, '\\$&');
     const regex = new RegExp(`[?&]${name}(=([^&#]*)|&|#|$)`);
@@ -27,11 +25,6 @@ export const ajax = (options, isOriginal = false, configure) => {
 
     if (options.method) {
         console.warn("Ajax does't support 'method' parameter! Please replace it by 'type'!");
-    }
-
-    // 非admin地址，api v1,v2接口相对于当前根路径
-    if (!/admin/.test(window.location.host)) {
-        options.url = options.url.replace(SHANBAY_HOST_REG, '');
     }
 
     const isVersionThreeAPI = /\/api\/v3\/|apiv3/.test(options.url);
