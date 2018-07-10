@@ -5,7 +5,9 @@
 This project is **working in progress**.
 
 # Installation
+
 ## npm
+
 ```
 $ npm install bay-utils.js
 ```
@@ -39,6 +41,7 @@ bayUtils.isMobileUA(navigator.userAgent);
 ## Format
 
 ### parseDate
+
     /**
      * 获取一个日期对象
      * @param {string} time 日期
@@ -47,6 +50,7 @@ bayUtils.isMobileUA(navigator.userAgent);
      const date = parseDate(time);
 
 ### formatDate
+
     /**
      * 获取某一格式的日期
      * @param {string} date 日期
@@ -70,6 +74,7 @@ bayUtils.isMobileUA(navigator.userAgent);
      > 星期四
 
 ### trimString
+
     /**
      * 截取字符串
      * @param {string} str 字符串
@@ -82,6 +87,7 @@ bayUtils.isMobileUA(navigator.userAgent);
      > Chi***
 
 ### formatSafetyStr
+
     /**
      * 获取一部分为明文的字符串
      * @param {string} str 字符串
@@ -95,6 +101,7 @@ bayUtils.isMobileUA(navigator.userAgent);
      > '1+++++com'
 
 ### formatSafetyEmail
+
     /**
      * 获取一部分为明文的邮箱地址
      * @param {string} email 邮箱地址
@@ -108,6 +115,7 @@ bayUtils.isMobileUA(navigator.userAgent);
      > '123********com'
 
 ### formatSafetyMobilephone
+
     /**
      * 获取一部分为明文的电话号码
      * @param {string} mobilephone 电话号码
@@ -120,6 +128,7 @@ bayUtils.isMobileUA(navigator.userAgent);
      > '181****3344'
 
 ### formatNumToCn
+
     /**
      * 将数字转化为中文
      * @param {number} number 数字
@@ -131,83 +140,100 @@ bayUtils.isMobileUA(navigator.userAgent);
 ## Validator
 
 ### assertString
+
     验证输入是否是字符串
     > assertString(111)
     > false
 
 ### toString
+
     > toString({x: 1})
     > false
 
 ### merge
+
     合并两个 object，第二个参数的 key 不会覆盖前面的。
     > merge({x: 1}, {x: 2, y: 4})
     > false
 
 ### isStandardBrowserEnv
+
     判断是否是标准的浏览器环境
     > isStandardBrowserEnv()
     > false
 
 ### isFunction
+
     > isFunction(function(){})
     > true
 
 ### isWechatUA
+
     判断 Agent 是否是微信
     > isWechatUA(navigator.userAgent)
     > false
 
 ### isMobileUA
+
     判断 Agent 是否是手机
     > isMobileUA(navigator.userAgent)
     > false
 
 ### isAndroidUA
+
     判断 Agent 是否是 Android
     > isAndroidUA(navigator.userAgent)
     > false
 
 ### isIOSUA
+
     判断 Agent 是否是 iOS
     > isIOSUA(navigator.userAgent)
     > false
 
 ### isShanbayAppUA
+
     判断 Agent 是否是扇贝 APP
     > isShanbayAppUA(navigator.userAgent)
     > false
 
 ### isMobilePhone
+
     判断字符串是否是手机号
     > isMobilePhone(13323432221)
     > true
 
 ### isEmail
+
     判断字符串是否是邮箱
     > isEmail('133@qq.com')
     > true
 
 ### isUrl
+
     判断字符串是否是 url
     > isUrl('https://www.shanbay.com/')
     > true
 
 ### escapeStr
+
     转义 <, >, &, ', " 和 /。
     > escapeStr('<p>hi</p>')
     > "&lt;p&gt;hi&lt;&#x2F;p&gt;"
 
 ### unescapeStr
+
     > unescapeStr("&lt;p&gt;hi&lt;&#x2F;p&gt;")
     > "<p>hi</p>"
 
 ### isStrLength
+
     第二个参数是 options，默认为 {min:0, max: undefined}
     > isStrLength('hello', {min: 2, max: 5})
     > true
 
 ### isJSON
+
     判断字符串是不是 json，使用 json.parse
     > isJSON('hello')
     > false
@@ -215,21 +241,25 @@ bayUtils.isMobileUA(navigator.userAgent);
     > true
 
 ### isNumeric
+
     判读字符串是否为数字
     > isNumeric('123');
     > true
 
 ### isEmptyStr
+
     判断字符串是否为空
     > isEmptyStr('123');
     > false
 
 ### isEmptyObj
+
     判断是否为空对象
     > isEmptyObj({});
     > true
 
 ### isArray
+
     判断是否为数组
     > isArray([]);
     > true
@@ -237,6 +267,7 @@ bayUtils.isMobileUA(navigator.userAgent);
 ## Dom
 
 ### hasClass
+
     /**
      * 判断元素是否有某个 class
      * @param {element} el 元素
@@ -246,6 +277,7 @@ bayUtils.isMobileUA(navigator.userAgent);
     hasClass(el, 'foo');
 
 ### addClass
+
     /**
      * 给元素添加某个 class
      * @param {element} el 元素
@@ -254,6 +286,7 @@ bayUtils.isMobileUA(navigator.userAgent);
     addClass(el, 'foo');
 
 ### removeClass
+
     /**
      * 给元素删除某个 class
      * @param {element} el 元素
@@ -262,6 +295,7 @@ bayUtils.isMobileUA(navigator.userAgent);
     removeClass(el, 'foo');
 
 ### getFormData
+
     /**
      * 获取表单数据
      * @param {element} formEl 表单元素
@@ -271,6 +305,7 @@ bayUtils.isMobileUA(navigator.userAgent);
      const data = getFormData(formEl);
 
 ### clearFormData
+
     /**
      * 清空表单输入框的值
      * @param {element} formEl 表单元素
@@ -278,6 +313,7 @@ bayUtils.isMobileUA(navigator.userAgent);
      clearFormData(formEl);
 
 ### selectElement
+
     /**
      * 选择元素中的内容
      * @param {element} el 元素
@@ -285,6 +321,7 @@ bayUtils.isMobileUA(navigator.userAgent);
      selectElement(el);
 
 ### copyToClipboard
+
     /**
      * 复制文字到剪贴板
      * @param {string} text 复制的内容
@@ -292,12 +329,14 @@ bayUtils.isMobileUA(navigator.userAgent);
      copyToClipboard(text);
 
 ### lazyloadImage
+
     /**
      * 图片懒加载
      */
      lazyloadImage();
 
 ### countDownBtn
+
     /**
      * 按钮倒计时
      * @param {element} el 按钮元素
@@ -309,6 +348,7 @@ bayUtils.isMobileUA(navigator.userAgent);
     **/
 
 ### parsePasteDataToMarkdown
+
     /**
      * 将 clipboard 中的内容转为 markdown
      * @param {event} e 事件
@@ -322,6 +362,7 @@ bayUtils.isMobileUA(navigator.userAgent);
 ## Others
 
 ### ajax
+
     /**
     * @param {string} options 类似 jquery ajax 的 options。
     * 不同的是当 isOriginal 为 false 时，success 判断了 status_code 为 0，success 会返回 data，
@@ -332,6 +373,7 @@ bayUtils.isMobileUA(navigator.userAgent);
     ajax(options, isOriginal, configure);
 
 ### getSearchValue
+
     /**
     * 获取链接中 search 的值
     * @param {string} name 名称
@@ -340,6 +382,7 @@ bayUtils.isMobileUA(navigator.userAgent);
     const value = getSearchValue(name);
 
 ### getCookie
+
     /**
     * 获取 cookie 中的值
     * @param {string} cookie 名称
@@ -348,6 +391,7 @@ bayUtils.isMobileUA(navigator.userAgent);
     const value = getCookie(cookie, name);
 
 ### getDayDiff
+
     /**
     * 获取两个日期相差的天数
     * @param {string} day1 日期
@@ -358,6 +402,7 @@ bayUtils.isMobileUA(navigator.userAgent);
     > 1
 
 ### getFrontendVersion
+
     /**
     * 获取 Frontend 版本号
     * @params {object} ua userAgent，默认为 window.navigator.userAgent
@@ -367,6 +412,7 @@ bayUtils.isMobileUA(navigator.userAgent);
     > 1.1
 
 ### uniqArr
+
     /**
     * 对 array 去重
     * @param {Array} 原数组
@@ -375,6 +421,7 @@ bayUtils.isMobileUA(navigator.userAgent);
     const newArr = uniqArr(arr);
 
 ### getUrlsFromStr
+
     /**
     * 获取 string 中的 urls
     * @param {String} 字符串
@@ -383,6 +430,7 @@ bayUtils.isMobileUA(navigator.userAgent);
     const urlsArr = getUrlsFromStr(str);
 
 ### transformUrlToAnchor
+
     /**
     * 将字符串中的 url 转化成 html 中的 a 元素
     * @params {String} 字符串
@@ -391,6 +439,7 @@ bayUtils.isMobileUA(navigator.userAgent);
     const newStr = transformUrlToAnchor(str);
 
 ### wxSdkConfig
+
     /**
     * 微信JSSDK分享接口
     *
@@ -406,6 +455,7 @@ bayUtils.isMobileUA(navigator.userAgent);
     wxSdkConfig(params);
 
 ### studyroomShare
+
     /**
     * 分享到自习室接口
     * @params {Object} 参数
@@ -423,8 +473,8 @@ bayUtils.isMobileUA(navigator.userAgent);
     */
     studyroomShare(params);
 
-
 ### getAppNameFromAgent
+
     /**
     * 根据 agent 获取当前 app 的 name，name 与 xbay 的 appsData 相同
     * @param {string} agent

@@ -24,11 +24,11 @@ export const removeClass = (el, className) => {
     }
 };
 
-export const getFormData = (formEl) => {
+export const getFormData = formEl => {
     const data = {};
     const inputEls = formEl.querySelectorAll('input, textarea');
     const inputList = Array.prototype.slice.call(inputEls);
-    inputList.forEach((el) => {
+    inputList.forEach(el => {
         const name = el.getAttribute('name');
         const type = el.getAttribute('type');
         let value = el.value;
@@ -52,15 +52,15 @@ export const getFormData = (formEl) => {
     return data;
 };
 
-export const clearFormData = (formEl) => {
+export const clearFormData = formEl => {
     const inputEls = formEl.querySelectorAll('input, textarea');
     const inputList = Array.prototype.slice.call(inputEls);
-    inputList.forEach((el) => {
+    inputList.forEach(el => {
         el.value = null; // eslint-disable-line
     });
 };
 
-export const selectElement = (element) => {
+export const selectElement = element => {
     if (document.selection) {
         const range = document.body.createTextRange();
         range.moveToElementText(element);
@@ -73,7 +73,7 @@ export const selectElement = (element) => {
     }
 };
 
-export const copyToClipboard = (text) => {
+export const copyToClipboard = text => {
     const element = document.createElement('div');
     element.textContent = text;
     document.body.appendChild(element);
@@ -87,11 +87,11 @@ export const lazyloadImage = (threshold = 100) => {
      * Note: The images which need lazyload must have 'data-src' property
      * @params threshold {Number} preload image before it shown
      */
-    const requestAnimationFrame = window.requestAnimationFrame ||
-        window.webkitRequestAnimationFrame;
+    const requestAnimationFrame =
+        window.requestAnimationFrame || window.webkitRequestAnimationFrame;
     const imageEls = document.querySelectorAll('img[data-src]');
 
-    const loadImage = (el) => {
+    const loadImage = el => {
         if (el.getAttribute('loaded')) {
             return;
         }
@@ -102,7 +102,7 @@ export const lazyloadImage = (threshold = 100) => {
 
     const loadViewedImage = () => {
         const imageElsArray = Array.prototype.slice.call(imageEls);
-        imageElsArray.forEach((el) => {
+        imageElsArray.forEach(el => {
             requestAnimationFrame(() => {
                 const elTop = el.getBoundingClientRect().top;
                 const documentHeight = window.innerHeight;
@@ -168,7 +168,7 @@ export const parsePasteDataToMarkdown = (e, disabledList = [], type = 'google-do
     };
 
     const resultStrs = [];
-    traverseDom($result, ($node) => {
+    traverseDom($result, $node => {
         let content = $node.html();
         const color = $node.css('color');
 

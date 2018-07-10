@@ -17,11 +17,13 @@ const commonConfig = {
         libraryTarget: 'var',
     },
     module: {
-        loaders: [{
-            test: /\.js$/,
-            exclude: /node_modules/,
-            loaders: ['babel'],
-        }],
+        loaders: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loaders: ['babel'],
+            },
+        ],
     },
     plugins: [
         new CleanWebpackPlugin(['./dist']),
@@ -29,8 +31,8 @@ const commonConfig = {
             include: /\.min\.js$/,
             minimize: true,
             compress: {
-                warnings: false
-            }
+                warnings: false,
+            },
         }),
     ],
 };

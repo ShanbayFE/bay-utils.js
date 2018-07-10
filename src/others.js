@@ -17,7 +17,7 @@ export const getCookie = (cookie, cname) => {
     const decodedCookie = decodeURIComponent(document.cookie);
     const ca = decodedCookie.split(';');
     const result = ca.filter(el => el.indexOf(name) > -1)[0];
-    return result && result.substring((name.length + result.indexOf(name)));
+    return result && result.substring(name.length + result.indexOf(name));
 };
 
 export const ajax = (options, isOriginal = false, configure) => {
@@ -26,7 +26,7 @@ export const ajax = (options, isOriginal = false, configure) => {
     options.type = options.type || options.method || 'GET';
 
     if (options.method) {
-        console.warn('Ajax does\'t support \'method\' parameter! Please replace it by \'type\'!');
+        console.warn("Ajax does't support 'method' parameter! Please replace it by 'type'!");
     }
 
     // 非admin地址，api v1,v2接口相对于当前根路径
@@ -34,12 +34,15 @@ export const ajax = (options, isOriginal = false, configure) => {
         options.url = options.url.replace(SHANBAY_HOST_REG, '');
     }
 
-
     const isVersionThreeAPI = /\/api\/v3\/|apiv3/.test(options.url);
 
-    const config = $.extend({}, {
-        LOGIN_URL: '/web/account/login',
-    }, configure);
+    const config = $.extend(
+        {},
+        {
+            LOGIN_URL: '/web/account/login',
+        },
+        configure,
+    );
 
     const defaultOptions = {
         crossDomain: true,
@@ -56,14 +59,16 @@ export const ajax = (options, isOriginal = false, configure) => {
         defaultOptions.headers['X-CSRFToken'] = getCookie(document.cookie, 'csrftoken');
     }
 
-    const checkAuth = (status) => {
+    const checkAuth = status => {
         if (status === 401) {
-            window.location.href = `${config.LOGIN_URL}/?next=${encodeURIComponent(window.location.href)}`;
+            window.location.href = `${config.LOGIN_URL}/?next=${encodeURIComponent(
+                window.location.href,
+            )}`;
         }
     };
 
     const primaryOptions = {
-        success: (json) => {
+        success: json => {
             if (isVersionThreeAPI) {
                 options.success && options.success(json);
                 return;
@@ -73,7 +78,7 @@ export const ajax = (options, isOriginal = false, configure) => {
                 options.success && options.success(json.data);
             } else {
                 if (json.status_code === 422) {
-                    json.msg = ((errors) => {
+                    json.msg = (errors => {
                         if (!errors) {
                             return json.msg;
                         }
@@ -88,7 +93,8 @@ export const ajax = (options, isOriginal = false, configure) => {
                     })(json.errors);
                 }
 
-                options.error && options.error(json.status_code, json.msg || '请求失败，请稍后重试');
+                options.error &&
+                    options.error(json.status_code, json.msg || '请求失败，请稍后重试');
             }
         },
         error: (xhr, textStatus) => {
@@ -96,7 +102,6 @@ export const ajax = (options, isOriginal = false, configure) => {
             options.error && options.error(xhr.status, `${textStatus}(${xhr.status})`);
         },
     };
-
 
     if (options.data && typeof options.data === 'object' && options.type !== 'GET') {
         options.data = JSON.stringify(options.data); // eslint-disable-line
@@ -131,8 +136,11 @@ export const getFrontendVersion = (userAgent = window.navigator.userAgent) => {
  * @params str {String}
  * @return urls {Array}
  */
-export const getUrlsFromStr = (str) => {
-    const urlPattern = new RegExp('https?:\\/\\/[-A-Za-z0-9+&@#\\/%?=~_|!:,.;]+[-A-Za-z0-9+&@#\\/%=~_|]', 'ig');
+export const getUrlsFromStr = str => {
+    const urlPattern = new RegExp(
+        'https?:\\/\\/[-A-Za-z0-9+&@#\\/%?=~_|!:,.;]+[-A-Za-z0-9+&@#\\/%=~_|]',
+        'ig',
+    );
     return str.match(urlPattern);
 };
 
@@ -157,18 +165,18 @@ export const uniqArr = (arr = []) => {
  * @params str {String}
  * @return newStr {String}
  */
-export const transformUrlToAnchor = (str) => {
+export const transformUrlToAnchor = str => {
     let newStr = str;
     const urls = uniqArr(getUrlsFromStr(str));
 
-    urls.forEach((url) => {
+    urls.forEach(url => {
         const anchor = `<a href='${url}' target='_blank'>${url}</a>`;
         newStr = newStr.replace(new RegExp(`${url}`, 'gi'), anchor);
     });
     return newStr;
 };
 
-export const getAppNameFromAgent = (agent) => {
+export const getAppNameFromAgent = agent => {
     let name;
 
     const appsData = {
@@ -182,7 +190,7 @@ export const getAppNameFromAgent = (agent) => {
         'com.beeblio.sentence': 'sentence',
     };
 
-    Object.keys(appsData).forEach((key) => {
+    Object.keys(appsData).forEach(key => {
         if (agent.indexOf(key) !== -1) {
             name = appsData[key];
         }

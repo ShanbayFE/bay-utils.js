@@ -36,7 +36,7 @@ const setWXConfig = (param, url) => {
         url: `${hostUrl}/api/v1/wechat/jsconfig/?url=${encodeURIComponent(window.location.href)}${
             codename ? `&codename=${codename}` : ''
         }`,
-        success: (data) => {
+        success: data => {
             shareData.link = replaceLinkHost(url || shareData.link, data.host);
 
             // wx.config() 函数会修改jsApiList参数
@@ -56,7 +56,7 @@ const setWXConfig = (param, url) => {
                     'onMenuShareAppMessage',
                     'onMenuShareQQ',
                     'onMenuShareQZone',
-                ].forEach((jsApi) => {
+                ].forEach(jsApi => {
                     if (shareData && jsApiList.indexOf(jsApi) !== -1) {
                         const newShareData = $.extend({}, shareData, {
                             success() {
@@ -74,7 +74,7 @@ const setWXConfig = (param, url) => {
                         signature: data.signature,
                     });
             });
-            wx.error((err) => {
+            wx.error(err => {
                 onError && onError(err);
             });
         },
@@ -94,7 +94,7 @@ const setWXConfig = (param, url) => {
  *  isDebug: 是否开启调试模式
  */
 
-export const wxSdkConfig = (param) => {
+export const wxSdkConfig = param => {
     const { onReady, trackObject = null, hostUrl = SHANBAY_HOST } = param;
     if (isWechatUA(window.navigator.userAgent)) {
         if (trackObject) {
@@ -102,7 +102,7 @@ export const wxSdkConfig = (param) => {
                 url: `${hostUrl}/api/v2/track/short_urls/`,
                 type: 'POST',
                 data: trackObject,
-                success: (data) => {
+                success: data => {
                     const { wechat } = data;
                     setWXConfig(param, wechat);
                 },
