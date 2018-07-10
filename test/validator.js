@@ -1,23 +1,28 @@
 /* eslint max-len: "off" */
 
-const assert = require('chai').assert;
 import * as bayUtils from '../src/index';
 
-const test = (options) => {
+const { assert } = require('chai');
+
+const test = options => {
     const args = options.args || [];
     args.unshift(null);
     it(`should validate ${options.name}`, () => {
         if (options.valid) {
-            options.valid.forEach((valid) => {
+            options.valid.forEach(valid => {
                 args[0] = valid;
-                const warning = `bayUtils.${options.validator}(${valid}, ${args.join(',')}) failed but should have passed`;
+                const warning = `bayUtils.${options.validator}(${valid}, ${args.join(
+                    ',',
+                )}) failed but should have passed`;
                 assert.equal(bayUtils[options.validator](...args), true, warning);
             });
         }
         if (options.invalid) {
-            options.invalid.forEach((invalid) => {
+            options.invalid.forEach(invalid => {
                 args[0] = invalid;
-                const warning = `bayUtils.${options.validator}(${invalid}, ${args.join(',')}) passed but should have failed`;
+                const warning = `bayUtils.${options.validator}(${invalid}, ${args.join(
+                    ',',
+                )}) passed but should have failed`;
                 assert.equal(bayUtils[options.validator](...args), false, warning);
             });
         }
@@ -26,7 +31,7 @@ const test = (options) => {
 
 describe('validator', () => {
     describe('assertString', () => {
-        it('should throw error if it isn\'t string', () => {
+        it("should throw error if it isn't string", () => {
             assert.isUndefined(bayUtils.assertString('123'));
             assert.throws(bayUtils.assertString);
         });
@@ -40,7 +45,7 @@ describe('validator', () => {
             assert.equal(bayUtils.toString({ x: 1, y: 'ice' }), '[object Object]'); // 对象
             assert.equal(
                 bayUtils.toString(new Date('2016-08')),
-                'Mon Aug 01 2016 08:00:00 GMT+0800 (CST)'
+                'Mon Aug 01 2016 08:00:00 GMT+0800 (CST)',
             ); // 日期
             assert.equal(bayUtils.toString(() => {}), ''); // 函数
             assert.equal(bayUtils.toString(undefined), ''); // undefined
@@ -75,22 +80,28 @@ describe('validator', () => {
     describe('isFunction', () => {
         test({
             validator: 'isFunction',
-            valid: [() => {}, (a) => { a = a + 1; return a; }],
-            invalid: [
-                { x: 1, y: 2 },
-                [1, 2, 3],
-                'i am string',
+            valid: [
+                () => {},
+                a => {
+                    a += 1;
+                    return a;
+                },
             ],
+            invalid: [{ x: 1, y: 2 }, [1, 2, 3], 'i am string'],
         });
     });
 
     const pcAgent = 'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95';
     const mobileAgent = 'AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143';
     const shanbayAgent = 'com.shanbay.words/7.5.900 (Android,4.4.4,MI 3W,Xiaomi; Frontend/1.1)';
-    const wechatAgent = 'micromessenger/3.2.1(Android,4.4.4,MI 3W,Xiaomi; Frontend/1.1) Chrome/55.0.2883.95';
-    const androidAgent = 'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) Chrome/55.0.2883.95 Mobile Safari/537.36';
-    const iPhoneAgent = 'Mozilla/5.0 (iPhone; CPU iPHone OS 9_1 like Mac OS X) Version/9.0 Mobile/13B143 Safari/601.1';
-    const iOSAgent = 'bayAgent/1.1 iOS/10.3 com.shanbay.speak/1.9.9_rv:99 channel/0 Apple/Simulator Frontend/1.5 api/2.3';
+    const wechatAgent =
+        'micromessenger/3.2.1(Android,4.4.4,MI 3W,Xiaomi; Frontend/1.1) Chrome/55.0.2883.95';
+    const androidAgent =
+        'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) Chrome/55.0.2883.95 Mobile Safari/537.36';
+    const iPhoneAgent =
+        'Mozilla/5.0 (iPhone; CPU iPHone OS 9_1 like Mac OS X) Version/9.0 Mobile/13B143 Safari/601.1';
+    const iOSAgent =
+        'bayAgent/1.1 iOS/10.3 com.shanbay.speak/1.9.9_rv:99 channel/0 Apple/Simulator Frontend/1.5 api/2.3';
     const sentenceAgent = 'com.beeblio';
 
     describe('isWechatUA', () => {
@@ -174,96 +185,63 @@ describe('validator', () => {
                 'http://foo--bar.com',
                 'http://foobar.com/?foo=bar',
             ],
-            invalid: [
-                'xyz://foobar.com',
-                'invalid.x',
-                'invalid.',
-                '.com',
-            ],
+            invalid: ['xyz://foobar.com', 'invalid.x', 'invalid.', '.com'],
         });
     });
 
     describe('escapeStr', () => {
         it('should transfor some symbol to string', () => {
-            assert.equal(bayUtils.escapeStr('<p>miao miao</p>'), '&lt;p&gt;miao miao&lt;&#x2F;p&gt;');
+            assert.equal(
+                bayUtils.escapeStr('<p>miao miao</p>'),
+                '&lt;p&gt;miao miao&lt;&#x2F;p&gt;',
+            );
         });
     });
 
     describe('unescapeStr', () => {
         it('should transfor some symbol to string', () => {
-            assert.equal(bayUtils.unescapeStr('&lt;p&gt;miao miao&lt;&#x2F;p&gt;'), '<p>miao miao</p>');
+            assert.equal(
+                bayUtils.unescapeStr('&lt;p&gt;miao miao&lt;&#x2F;p&gt;'),
+                '<p>miao miao</p>',
+            );
         });
     });
 
     describe('isStrLength', () => {
         test({
             validator: 'isStrLength',
-            valid: [
-                'miaomiaomiao',
-                'iamstring',
-                '我是字符串i am',
-                'lalalalalaaaaaaaa==',
-                'la',
+            valid: ['miaomiaomiao', 'iamstring', '我是字符串i am', 'lalalalalaaaaaaaa==', 'la'],
+            invalid: ['', 'lalalalalaaaaaaaa==lalalalalaaaaaaaa==lalalalalaaaaaaaa=='],
+            args: [
+                {
+                    max: 30,
+                    min: 2,
+                },
             ],
-            invalid: [
-                '',
-                'lalalalalaaaaaaaa==lalalalalaaaaaaaa==lalalalalaaaaaaaa==',
-            ],
-            args: [{
-                max: 30,
-                min: 2,
-            }],
         });
     });
 
     describe('isJSON', () => {
         test({
             validator: 'isJSON',
-            valid: [
-                '{"x": 1, "y": "miao"}',
-                '{}',
-            ],
-            invalid: [
-                '{ key: "value" }',
-                '{ \'key\': \'value\' }',
-                'null',
-                '1234',
-                'false',
-                '"nope"',
-            ],
+            valid: ['{"x": 1, "y": "miao"}', '{}'],
+            invalid: ['{ key: "value" }', "{ 'key': 'value' }", 'null', '1234', 'false', '"nope"'],
         });
     });
 
     describe('isNumeric', () => {
         test({
             validator: 'isNumeric',
-            valid: [
-                '123',
-                '00123',
-                '-00123',
-                '0',
-                '-0',
-                '+123',
-            ],
-            invalid: [
-                '123.123',
-                ' ',
-                '.',
-            ],
+            valid: ['123', '00123', '-00123', '0', '-0', '+123'],
+            invalid: ['123.123', ' ', '.'],
         });
     });
 
     describe('isEmptyStr', () => {
         test({
             validator: 'isEmptyStr',
-            valid: [
-                '',
-            ],
-            invalid: [
-                'miao',
-                ' ',
-                '3',
-            ],
+            valid: [''],
+            invalid: ['miao', ' ', '3'],
         });
     });
 

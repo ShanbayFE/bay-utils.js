@@ -1,21 +1,21 @@
 {
-    "extends": "airbnb",
+    "extends": ["airbnb", "shanbay", "prettier"],
     "rules": {
         "indent": [2, 4],
         "react/jsx-indent-props": [2, 4],
         "react/jsx-indent": ["error", 4],
         "import/no-unresolved": 0,
-        "no-unused-expressions": [2, { allowShortCircuit: true }],
+        "no-unused-expressions": [2, { "allowShortCircuit": true }],
         "no-script-url": 0,
         "no-param-reassign": 0
     },
     "globals": {
         "$": true,
         "describe": true,
-        "it": true,
+        "it": true
     },
     "env": {
         "browser": true,
-        "node": true,
+        "node": true
     }
 }

@@ -1,4 +1,4 @@
-export const parseDate = (time) => {
+export const parseDate = time => {
     // example: '2017-03-02T23:49:45+0800';
     const regex = /^(\d{4})\-(\d{2})\-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\+|\-)(\d{4})$/;
     // example: '2017-03-02T23:49:45';
@@ -13,7 +13,7 @@ export const parseDate = (time) => {
 };
 
 export const pad = (n, length, symbol) =>
-    (n.length >= length ? n : new Array(length - n.length + 1).join(symbol) + n);
+    n.length >= length ? n : new Array(length - n.length + 1).join(symbol) + n;
 
 export const formatDate = (date, format = 'yyyy-MM-DD') => {
     const weekdays = '日_一_二_三_四_五_六'.split('_');
@@ -86,8 +86,8 @@ export const formatSafetyStr = (str, start, end, symbol = '*', symbolLen) => {
 
 export const formatSafetyEmail = (email, start, end, symbol, symbolLen) => {
     const str = email.toString();
-    start = Number(start) || Math.floor(str.length * 1 / 4);
-    end = Number(end) || Math.floor(str.length * 1 / 4);
+    start = Number(start) || Math.floor((str.length * 1) / 4);
+    end = Number(end) || Math.floor((str.length * 1) / 4);
     return formatSafetyStr(str, start, end, symbol, symbolLen);
 };
 
@@ -95,7 +95,7 @@ export const formatSafetyMobilephone = (mobilephone, start = 3, end = 4, symbol)
     formatSafetyStr(mobilephone, start, end, symbol);
 
 // 只处理低于 100 的数字
-export const formatNumToCn = (str) => {
+export const formatNumToCn = str => {
     const num = +str;
 
     const numCnArr = ['', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
